@@ -12,6 +12,7 @@ class SyntacticalAnalyzer
     public:
 	SyntacticalAnalyzer (char * filename);
 	~SyntacticalAnalyzer ();
+	ofstream inputP2file;
 	int program();
         int more_defines();
         int define();
