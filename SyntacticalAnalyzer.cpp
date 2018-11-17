@@ -1,3 +1,5 @@
+//Global TODO: 1) need to output to a different file (not input file from all of the functions)
+
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -5,32 +7,38 @@
 
 using namespace std;
 
-
 /// The GetTokenName() Function is given to us by Watts in her lexical.cpp
 
 SyntacticalAnalyzer::SyntacticalAnalyzer (char * filename)
-{
+{//TODO: needs output file.
 	lex = new LexicalAnalyzer (filename);
 	token_type t;
-	inputP2file.open();
 	token = lex -> GetToken();
+	input.open(filename);
+	listingFile.open("P2-1.lst");
+	ruleFile.open("P2-1.p2");
+	debugFile.open("P2-1.dbg");
+	listingFile << "Input file: " << filename << endl;
 	// GetLexeme()?
 	// program ();
 	
 }
 
 SyntacticalAnalyzer::~SyntacticalAnalyzer ()
-{
+{//TODO: close output
 	delete lex;
-	inputP2file.close();
+	input.close();
+	listingFile.close();
+	ruleFile.close();
+	debugFile.close();
 }
 
 int SyntacticalAnalyzer::program(){
 	// Take in input file and applies rule 1
 	
-	inputP2file  << "Current token is: " << lex ->GetTokenName (token) <<  endl; 
+	input  << "Current token is: " << lex ->GetTokenName (token) <<  endl; 
 	int errors = 0;
-	inputP2file << "Applying Rule 1" << endl;
+	input << "Applying Rule 1" << endl;
 	errors += define();
 	errors += more_defines();
 	if (token != EOF_T) {
@@ -38,38 +46,38 @@ int SyntacticalAnalyzer::program(){
 		// lex -> ("Unable to find end of file token");
 
 	} // end of if EOF
-	inputP2file << "Function complete, current token is: " << lex ->GetTokenName (token) << endl;
+	input << "Function complete, current token is: " << lex ->GetTokenName (token) << endl;
 	return errors;
 
 }
 
 int SyntacticalAnalyzer::more_defines(){
 
-	inputP2file << "Starting more_defines function. Current token is: " << lex ->GetTokenName(token) << endl;
+	input << "Starting more_defines function. Current token is: " << lex ->GetTokenName(token) << endl;
 	int errors = 0;
 	if(token == LPAREN_T){
-		inputP2file << "Applying Rule 3" << endl;
+		input << "Applying Rule 3" << endl;
 		errors += define();
 		errors += more_defines();
-		inputP2file << "more_defines function complete. Current token is: " << lex ->GetTokenName (token) << endl; 
+		input << "more_defines function complete. Current token is: " << lex ->GetTokenName (token) << endl; 
 		return errors; 
 
 
 	} // end left paren. if 
 
-	inputP2file << "Applying Rule 4" << endl;
-	inputP2file << "more_defines function complete. Current token is: " << lex ->GetTokenName (token) << endl;
+	input << "Applying Rule 4" << endl;
+	input << "more_defines function complete. Current token is: " << lex ->GetTokenName (token) << endl;
 	return errors;
 
 }			
 
 int SyntacticalAnalyzer::define(){
 
-	inputP2file << "Start of  define. Current token is: " << lex->GetTokenName(token) <<  endl;
+	input << "Start of  define. Current token is: " << lex->GetTokenName(token) <<  endl;
 
 	int errors = 0;
 	
-	inputP2file << " Applying  Rule 2" << endl;
+	input << " Applying  Rule 2" << endl;
 
     if(token != LPAREN_T){
         errors++;
@@ -107,44 +115,44 @@ int SyntacticalAnalyzer::define(){
         errors++;
     }
 
-   inputP2file << "Define function complete. Current token is: " << lex->GetTokenName (token) << endl;
+   input << "Define function complete. Current token is: " << lex->GetTokenName (token) << endl;
 
     return errors;
 
 }
 
-int SyntacticalAnalyzer::stmt_list(){
-	inputP2file << "Starting stmt_List function. Current token is: " << lex->GetTokenName (token) << endl;
+int SyntacticalAnalyzer::stmt_list(){ //
+	input << "Starting stmt_List function. Current token is: " << lex->GetTokenName (token) << endl;
 
 	int errors = 0;
 
 	if(token == RPAREN_T) {
-		inputP2file << "Applying Rule 6" << endl;
-		inputP2file << "stmt_list function complete. Current token is: " << lex->GetTokenName(token) << endl;
+		input << "Applying Rule 6" << endl;
+		input << "stmt_list function complete. Current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	} // End of Right paren if 
-	inputP2file << "Applying Rule 5" << endl;
+	input << "Applying Rule 5" << endl;
 	errors += stmt();
 	errors += stmt_list();
-	inputP2file << "stmt_list function complete. Current token is: " << lex ->GetTokenName(token) << endl;
+	input << "stmt_list function complete. Current token is: " << lex ->GetTokenName(token) << endl;
 	return errors;
 
 }
 				
 int SyntacticalAnalyzer::stmt(){
 
-	inputP2file << "Starting stmt function. Current token is: " << lex->GetTokenName (token) << endl;
+	input << "Starting stmt function. Current token is: " << lex->GetTokenName (token) << endl;
     
 	int errors = 0;
 	if(token == IDENT_T) {
-		inputP2file << "Applying Rule 8" << endl;
+		input << "Applying Rule 8" << endl;
 		token = lex->GetToken();
-		inputP2file << "stmt function complete. Current token is: " << lex->GetTokenName(token) << endl;
+		input << "stmt function complete. Current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	}
 
 	if(token == LPAREN_T) {
-		inputP2file << "Applying Rule 9" << endl;
+		input << "Applying Rule 9" << endl;
 		token = lex->GetToken();
 		// errors += Action();
 		while(token != RPAREN_T && token != EOF_T) {
@@ -156,10 +164,10 @@ int SyntacticalAnalyzer::stmt(){
 		}
 		token = lex->GetToken();
 	} else {
-		inputP2file << "Applying Rule 7" << endl;
+		input << "Applying Rule 7" << endl;
 		errors += literal();
 	}
-	inputP2file << "stmt function complete. Current token is: "
+	input << "stmt function complete. Current token is: "
 			<< lex->GetTokenName(token) << endl;
 	return errors;
 
@@ -171,24 +179,24 @@ int SyntacticalAnalyzer::literal(){
 						
 int SyntacticalAnalyzer::more_tokens(){
 
-inputP2file << "Entering More_Tokens function; current token is: " << lex->GetTokenName(token) << endl;
+input << "Entering More_Tokens function; current token is: " << lex->GetTokenName(token) << endl;
     
 	int errors = 0;
 	if (token == EOF_T){
 		errors++;
 		// report error
-		inputP2file << "more_tokens function complete. Current token is: " << lex->GetTokenName(token) << endl;
+		input << "more_tokens function complete. Current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	}
 	if (token == RPAREN_T) {
-		inputP2file << "Applying Rule 15" << endl;
-		inputP2file << "more_tokens function complete. Current token is: " << lex->GetTokenName(token) << endl;
+		input << "Applying Rule 15" << endl;
+		input << "more_tokens function complete. Current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	}
-	inputP2file << "Applying Rule 14" << endl;
+	input << "Applying Rule 14" << endl;
 	errors += any_other_token();
 	errors += more_tokens();
-	inputP2file << "more_tokens function complete. Current token is: " << lex->GetTokenName(token) << endl;
+	input << "more_tokens function complete. Current token is: " << lex->GetTokenName(token) << endl;
 	return errors;
 
 }
@@ -196,24 +204,24 @@ inputP2file << "Entering More_Tokens function; current token is: " << lex->GetTo
 int SyntacticalAnalyzer::quoted_lit(){
 
 	int errors = 0;
-	inputP2file << "Starting quoted_lit function. Current token is: " << lex->GetTokenName(token) << endl;
+	input << "Starting quoted_lit function. Current token is: " << lex->GetTokenName(token) << endl;
 	
-	inputP2file << "Applying Rule 13" << endl;
+	input << "Applying Rule 13" << endl;
 	errors += any_other_token();
-	inputP2file << "quoted_lit function complete. Current token is: " << lex->GetTokenName(token) << endl;
+	input << "quoted_lit function complete. Current token is: " << lex->GetTokenName(token) << endl;
 	return errors;
 
 }			
 					
 int SyntacticalAnalyzer::param_list(){
 
-	inputP2file << " param_list function complete. Current token is: " << lex->GetTokenName(token) << endl;
+	input << " param_list function complete. Current token is: " << lex->GetTokenName(token) << endl;
 	int errors = 0;
     
     if(token == RPAREN_T) {
-        inputP2file << "Applying Rule 17" << endl;
+        input << "Applying Rule 17" << endl;
         
-        inputP2file << "param_list function complete. Current token is: " << lex->GetTokenName (token) << endl;
+        input << "param_list function complete. Current token is: " << lex->GetTokenName (token) << endl;
         return errors;
     } else {
         while(token != IDENT_T) {
@@ -222,41 +230,41 @@ int SyntacticalAnalyzer::param_list(){
             //exit(1);
             token = lex->GetToken();
         }
-        inputP2file << "Applying Rule 16" << endl;
+        input << "Applying Rule 16" << endl;
         token = lex->GetToken();
         errors += param_list();
     }
     
-    inputP2file << "param_list function complete. Current token is: " << lex->GetTokenName(token) << endl;
+    input << "param_list function complete. Current token is: " << lex->GetTokenName(token) << endl;
     return errors;
 
 }
 					
 int SyntacticalAnalyzer::else_part(){
 
-inputP2file << "Starting else_part function. Current token is: " << lex->GetTokenName(token) << endl;
+input << "Starting else_part function. Current token is: " << lex->GetTokenName(token) << endl;
     
 	int errors = 0;
 	if (token == EOF_T) {
 		errors++;
-		inputP2file << "else_part function complete. Current token is: " << lex->GetTokenName(token) << endl;
+		input << "else_part function complete. Current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	} // end EOF if 
 	if (token == RPAREN_T) {
-		inputP2file << "Applying Rule 19" << endl;
-		inputP2file << "else_part function complete. Current token is: " << lex->GetTokenName(token) << endl;
+		input << "Applying Rule 19" << endl;
+		input << "else_part function complete. Current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	} // end Right paren if  
 
-	inputP2file << "Applying Rule 18" << endl;
+	input << "Applying Rule 18" << endl;
 	errors += stmt();
-	inputP2file << "else_part function complete. Current token is: " << lex->GetTokenName(token) << endl;
+	input << "else_part function complete. Current token is: " << lex->GetTokenName(token) << endl;
 	return errors;
 }
 					
 int SyntacticalAnalyzer::stmt_pair(){
 
-	inputP2file << "Entering Stmt_Pair function; current token is: " << lex->GetTokenName(token) << endl;
+	input << "Entering Stmt_Pair function; current token is: " << lex->GetTokenName(token) << endl;
     
 	int errors = 0;
 	while (token != LPAREN_T){
@@ -266,7 +274,7 @@ int SyntacticalAnalyzer::stmt_pair(){
 		token = lex->GetToken();	
 	} // end left paren if
 	token = lex->GetToken();
-	inputP2file << "Applying Rule 20" << endl;
+	input << "Applying Rule 20" << endl;
 	errors	+= stmt_pair_body();
 	while (token != RPAREN_T){
 		errors++;
@@ -275,7 +283,7 @@ int SyntacticalAnalyzer::stmt_pair(){
 		token = lex->GetToken();
 	} // end right paren if 
 	token = lex->GetToken();
-	inputP2file << "stmt_pair function complete. Current token is: " << lex->GetTokenName(token) << endl;
+	input << "stmt_pair function complete. Current token is: " << lex->GetTokenName(token) << endl;
 	return errors;
 
 
@@ -283,11 +291,11 @@ int SyntacticalAnalyzer::stmt_pair(){
 					
 int SyntacticalAnalyzer::stmt_pair_body(){
 
-	inputP2file << "Starting stmt_pair_body function. Current token is: " << lex->GetTokenName(token)<< endl;
+	input << "Starting stmt_pair_body function. Current token is: " << lex->GetTokenName(token)<< endl;
 	int errors = 0;
     
     if(token == LPAREN_T) {
-        inputP2file << "Applying Rule 21" << endl;
+        input << "Applying Rule 21" << endl;
         token = lex->GetToken();
         errors += action();
         
@@ -302,13 +310,13 @@ int SyntacticalAnalyzer::stmt_pair_body(){
     } // end left paren if
 
     if(token == NUMLIT_T || token == STRLIT_T || token == SQUOTE_T) {
-        inputP2file << "Applying Rule 23" << endl;
+        input << "Applying Rule 23" << endl;
         errors += literal();
     }else{
-        inputP2file << "Applying Rule 22" << endl;
+        input << "Applying Rule 22" << endl;
         errors += action();
     } // end literal and action if else
-    inputP2file << "Exiting Stmt_Pair_Body function; current token is: " << lex->GetTokenName(token) << endl;
+    input << "Exiting Stmt_Pair_Body function; current token is: " << lex->GetTokenName(token) << endl;
     return errors;
 
 }

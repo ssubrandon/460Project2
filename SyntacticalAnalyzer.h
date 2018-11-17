@@ -12,7 +12,6 @@ class SyntacticalAnalyzer
     public:
 	SyntacticalAnalyzer (char * filename);
 	~SyntacticalAnalyzer ();
-	ofstream inputP2file;
 	int program();
         int more_defines();
         int define();
@@ -30,6 +29,10 @@ class SyntacticalAnalyzer
     private:
 	LexicalAnalyzer * lex;
 	token_type token;
+	ifstream input;
+	ofstream listingFile;
+	ofstream ruleFile;
+	ofstream debugFile;
 };
 	
 #endif
