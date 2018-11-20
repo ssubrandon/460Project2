@@ -30,6 +30,10 @@ class SyntacticalAnalyzer
     private:
 	LexicalAnalyzer * lex;
 	token_type token;
+	ifstream input;
+	ofstream listingFile;
+	ofstream ruleFile;
+	ofstream debugFile;
 };
 	
 #endif
