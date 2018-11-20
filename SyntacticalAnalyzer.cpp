@@ -191,12 +191,12 @@ int SyntacticalAnalyzer::literal(){
       token = lex->GetToken();
   }
   if (token == NUMLIT_T)
-    {
-      //APPLYING RULE 11
+    { 
+       listingFile << "Applying Rule 11" << endl;
     }
     if (token == STRLIT_T)
     {
-      //APPLYING RULE 11                                                                   
+      listingFile << "Applying Rule 12" << endl;
     }
   if ( token == SQUOTE_T )
     {
