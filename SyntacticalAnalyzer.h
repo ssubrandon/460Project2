@@ -27,6 +27,7 @@ class SyntacticalAnalyzer
         int stmt_pair_body();
         int action();
         int any_other_token();
+	void ReportError (const string & msg);
     private:
 	LexicalAnalyzer * lex;
 	token_type token;
@@ -34,6 +35,7 @@ class SyntacticalAnalyzer
 	ofstream listingFile;
 	ofstream ruleFile;
 	ofstream debugFile;
+	string currentLine;
 };
 	
 #endif

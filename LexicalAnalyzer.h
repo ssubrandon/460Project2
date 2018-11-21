@@ -47,6 +47,9 @@ class LexicalAnalyzer
 	string GetTokenName (token_type t) const;
 	string GetLexeme () const;
 	void ReportError (const string & msg);
+	int get_line_num();
+	int get_pos();
+	string get_line();
 	ofstream debug;
     private:
 	ifstream input;
