@@ -282,7 +282,7 @@ int SyntacticalAnalyzer::quoted_lit(){
 
 int SyntacticalAnalyzer::param_list(){
 
-	//  ruleFile << " param_list function complete. Current token is: " << lex->GetTokenName(token) << endl;
+	ruleFile << " param_list function starting. Current token is: " << lex->GetTokenName(token) << endl;
 	int errors = 0;
 
  
@@ -292,19 +292,26 @@ int SyntacticalAnalyzer::param_list(){
 		ruleFile << "param_list function complete. Current token is: " << lex->GetTokenName (token) << endl;
 		return errors;
 	}
-	else{ 
+	else if (token == IDENT_T){
+		ruleFile << "param_list function complete. Current token is: " << lex->GetTokenName (token) << endl;
+		ruleFile << "Applying Rule 16" << endl;
+		token = lex->GetToken();
+		errors += param_list();
+	}
+	else{//we have an error
+		errors++;
+		ReportError(string("expected a IDENT_T or RPAREN_T in paramList, but found  " + lex->GetTokenName(token)));
+		return errors;
+		ruleFile << "param_list function complete. Current token is: " << lex->GetTokenName(token) << endl;
+	}
+
+	       /* I think this is wrong -Brandon	
 		while(token != IDENT_T) {
 			errors++;
 			ReportError(string("expected a IDENT_T in paramList, but found  " + lex->GetTokenName(token)));
 			token = lex->GetToken();
 		}
-		ruleFile << "Applying Rule 16" << endl;
-		token = lex->GetToken();
-		errors += param_list();
-	}
-
-	//ruleFile << "param_list function complete. Current token is: " << lex->GetTokenName(token) << endl;
-	return errors;
+		*/
 }
 
 
@@ -421,7 +428,7 @@ return errors;
 
 int SyntacticalAnalyzer::action(){
 	int errors = 0;
-	
+	ruleFile << "Entering Action function; current token is: " << lex->GetTokenName(token) << endl;
 	if (token == IF_T)
 	{//applying rule 24
 		ruleFile << "Applying Rule 24" << endl;
@@ -626,7 +633,7 @@ int SyntacticalAnalyzer::action(){
 		ruleFile << "Exiting Action function; current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	}
-	if ( token == GTE_T){
+	if ( token == DISPLAY_T){
 		//RULE 48
 		ruleFile << "Applying Rule 48" << endl;
 		token = lex->GetToken();
@@ -634,7 +641,7 @@ int SyntacticalAnalyzer::action(){
 		ruleFile << "Exiting Action function; current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	}
-	if ( token == GTE_T){
+	if ( token == NEWLINE_T){
 		//RULE 49
 		ruleFile << "Applying Rule 49" << endl;
 		token = lex->GetToken();
