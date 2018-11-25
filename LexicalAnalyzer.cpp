@@ -83,7 +83,7 @@ LexicalAnalyzer::LexicalAnalyzer (char * filename)
 	}
 	string p1name = name.substr (0, name.length()-3) + ".p1"; 
 	p1file.open (p1name.c_str());
-	string listingname = name.substr (0, name.length()-3) + ".lst"; 
+	string listingname = name.substr (0, name.length()-3) + ".Zlst"; 
 	listing.open (listingname.c_str());
 	listing << "Input file: " << filename << endl;
 	string debugname = name.substr (0, name.length()-3) + ".dbg"; 

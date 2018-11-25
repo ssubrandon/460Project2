@@ -51,9 +51,9 @@ class LexicalAnalyzer
 	int get_pos();
 	string get_line();
 	ofstream debug;
+	ofstream listing;
     private:
 	ifstream input;
-	ofstream listing;
 	ofstream p1file;
 	string line;
 	int linenum;
