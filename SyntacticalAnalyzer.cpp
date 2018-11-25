@@ -764,7 +764,7 @@ int SyntacticalAnalyzer::any_other_token(){
 		case SQUOTE_T:
 			ruleFile << "Applying Rule 79\n";
 			token = lex->GetToken();
-			errors += any_other_token;
+			errors += any_other_token();
 			break;
 		case COND_T:
 			ruleFile << "Applying Rule 80\n";
@@ -780,7 +780,7 @@ int SyntacticalAnalyzer::any_other_token(){
 			ReportError(string("No rule found in any_other_token function, current token is: " + lex->GetTokenName(token)));
 			token = lex->GetToken();
 	}
-	}	
+
 	//if the current token at this point is not apart of the follows then that is an error?
 	/*
 	while(!follows){
@@ -795,7 +795,7 @@ int SyntacticalAnalyzer::any_other_token(){
 }
 
 void SyntacticalAnalyzer::ReportError (const string & msg){
-	listingFile << "Syntax error at " << lex->get_line_num << ',' << lex->get_pos << ": " << msg << endl;
-	debugFile << "Syntax error at " << lex->get_line_num << ',' << lex->get_pos << ": " << msg << endl;
+  listingFile << "Syntax error at " << lex->get_line_num() << ',' << lex->get_pos() << ": " << msg << endl;
+  debugFile << "Syntax error at " << lex->get_line_num() << ',' << lex->get_pos() << ": " << msg << endl;
 
 }
