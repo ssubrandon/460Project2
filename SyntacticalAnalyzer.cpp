@@ -24,7 +24,7 @@ SyntacticalAnalyzer::SyntacticalAnalyzer (char * filename)
 	ruleFile.open(file + ".Zp2");
 //	listingFile.open(file +"Z.lst");
 //	debugFile.open(file + "Z.dbg"); 
-	token = lex -> GetToken();
+	//token = lex -> GetToken();
 	
 	//listingFile << "Input file: " << filename << endl;
 	//debugFile << "Input file: " << filename << endl;
@@ -53,7 +53,7 @@ int SyntacticalAnalyzer::program(){
 
 	if(token != LPAREN_T){
 		errors++;
-		ReportError(string("expected a LPAREN_T, but found  " + lex->GetTokenName(token)));
+		ReportError(string("expected a LPAREN_T, currently in program, but found  " + lex->GetTokenName(token)));
 	}
 	token = lex->GetToken();
 
@@ -61,7 +61,7 @@ int SyntacticalAnalyzer::program(){
 
 	if(token != LPAREN_T){
 		errors++;
-		ReportError(string("expected a LPAREN_T, but found  " + lex->GetTokenName(token)));
+		ReportError(string("expected a LPAREN_T in program, but found  " + lex->GetTokenName(token)));
 	}
 
 	token = lex->GetToken();
@@ -86,7 +86,7 @@ int SyntacticalAnalyzer::more_defines(){
 		errors += stmt_list();
 		if(token != RPAREN_T){
 			errors++;
-			ReportError(string("expected a RPAREN_T, but found  " + lex->GetTokenName(token)));
+			ReportError(string("expected a RPAREN_T in m_d, but found  " + lex->GetTokenName(token)));
 		}
 		token = lex->GetToken();
 		ruleFile << "more_defines function complete. Current token is: " << lex ->GetTokenName (token) << endl; 
@@ -101,7 +101,7 @@ int SyntacticalAnalyzer::more_defines(){
 
 	if(token != LPAREN_T){
 		errors++;
-		ReportError(string("expected a LPAREN_T, but found  " + lex->GetTokenName(token)));
+		ReportError(string("expected a LPAREN_T in m_d, but found  " + lex->GetTokenName(token)));
 	}
 	token = lex->GetToken();
 
@@ -124,19 +124,19 @@ int SyntacticalAnalyzer::define(){
 
 	if(token != DEFINE_T){
 		errors++;
-		ReportError(string("expected a DEFINE_T, but found  " + lex->GetTokenName(token)));
+		ReportError(string("expected a DEFINE_T in define, but found  " + lex->GetTokenName(token)));
 	}
 
 	token = lex->GetToken();
 	if(token != LPAREN_T){
 		errors++;
-		ReportError(string("expected a LPAREN_T, but found  " + lex->GetTokenName(token)));
+		ReportError(string("expected a LPAREN_T in define, but found  " + lex->GetTokenName(token)));
 	}
 
 	token = lex->GetToken();
 	if(token != IDENT_T){
 		errors++;
-		ReportError(string("expected a IDENT_T, but found  " + lex->GetTokenName(token)));
+		ReportError(string("expected a IDENT_T in define, but found  " + lex->GetTokenName(token)));
 	}
 
 	token = lex->GetToken();
@@ -145,7 +145,7 @@ int SyntacticalAnalyzer::define(){
 
 	if(token != RPAREN_T){
 		errors++;
-		ReportError(string("expected a RPAREN_T, but found  " + lex->GetTokenName(token)));
+		ReportError(string("expected a RPAREN_T in define, but found  " + lex->GetTokenName(token)));
 	}
 	token = lex->GetToken();
 	errors += stmt();
@@ -154,7 +154,7 @@ int SyntacticalAnalyzer::define(){
 
 	if(token != RPAREN_T){
 		errors++;
-		ReportError(string("expected a RPAREN_T, but found  " + lex->GetTokenName(token)));
+		ReportError(string("expected a RPAREN_T in define, but found  " + lex->GetTokenName(token)));
 	}
 	token = lex->GetToken();
 	ruleFile << "Define function complete. Current token is: " << lex->GetTokenName (token) << endl;
