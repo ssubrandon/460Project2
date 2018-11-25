@@ -1,0 +1,11 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/T3P2.ss
+   1: (define (main)
+   2:   (+ 4)
+   3:   (- 4)
+   4:   (/ 4)
+   5:   (* 4)
+   6:   (modulo 4 4)
+   7:   (round 4.4)
+   8: )
+   9: (main)
+0 errors found in input file

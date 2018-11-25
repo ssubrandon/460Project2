@@ -1,0 +1,45 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/W5P2.ss
+   1: (define (sub_five x)
+   2:   (if (number? x)
+   3:       (if (zero? x)
+   4:           -5
+   5:           (- x 5)
+   6:           )
+   7:       'this_function_only_takes_numbers
+   8:       )
+   9:   )
+  10: 
+  11: (define (add_five x)
+  12:   (if (number? x)
+  13:       (if (zero? x)
+  14:           5
+  15:           x+5
+Error at 15,13: 'RPAREN_T' expected 
+  16:           )
+  17:       'this_function_only_takes_numbers
+  18:       )
+  19:   )
+Error at 19,3: 'LPAREN_T' expected 
+Error at 19,3: ')' unexpected 
+  20: (define (main)
+  21:   (display (sub_five 0))
+  22:   (newline)
+  23: 
+  24:   (display (sub_five 9))
+  25:   (newline)
+  26: 
+  27:   (display (sub_five -3))
+  28:   (newline)
+  29: 
+  30:   (display (add_five 0))
+  31:   (newline)
+  32:   
+  33:   (display (add_five 4))
+  34:   (newline)
+  35:   
+  36:   (display (add_five -3))
+  37:   (newline)
+  38:   )
+  39: 
+  40: (main)
+3 errors found in input file

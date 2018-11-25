@@ -299,7 +299,19 @@ string LexicalAnalyzer::GetLexeme () const
 
 void LexicalAnalyzer::ReportError (const string & msg)
 {
-	listing << "Error at " << linenum << ',' << pos << ": " << msg << endl;
-	debug << "Error at " << linenum << ',' << pos << ": " << msg << endl;
+	listing << "Lexical error at " << linenum << ',' << pos << ": " << msg << endl;
+	debug << "Lexical error at " << linenum << ',' << pos << ": " << msg << endl;
 	errors++;
+}
+
+int LexicalAnalyzer::get_line_num(){
+	return linenum;
+}
+					
+int LexicalAnalyzer::get_pos(){
+	return pos;
+}
+
+string LexicalAnalyzer::get_line(){
+	return line;
 }

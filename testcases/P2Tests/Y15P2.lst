@@ -1,0 +1,10 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/Y15P2.ss
+   1: (define (main)
+   2:   '("pineapple" 7 "stuff")
+   3:   (newline)
+   4: )
+   5: (foobar (display "aTestCase"))
+   6: 
+   7: (main)
+Error at 7,1: 'EOF_T' expected 
+1 errors found in input file

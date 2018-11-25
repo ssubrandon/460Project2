@@ -1,0 +1,20 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/Y1P2.ss
+   1: (define (main)
+   2:   (cond (123 "test"))
+   3:   (display (cdr '(modulo)))
+   4:   (newline)
+   5:   (display (cons '- ''/))
+   6:   (newline)
+   7:   (display (and (or (not (cond (else "123"))))))
+   8:   (newline)
+   9:   )
+  10: 
+  11: (define (funct2)
+  12:   (display '(* round =))
+  13:   (newline)
+  14:   )
+  15: 
+  16: (main)
+  17: (funct2)
+Error at 17,1: 'EOF_T' expected 
+1 errors found in input file

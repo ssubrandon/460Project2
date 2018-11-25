@@ -1,0 +1,15 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/Y11P2.ss
+   1: (define (rule20_Test t)
+   2:   (cond ((= t 0) 'equal)
+   3:         ((< t 0) 'negative)
+   4:         (else 'positive)
+   5:         )
+   6:   )
+   7: 
+   8: (rule20_Test 20)
+   9: 
+  10: ;(newline)
+  11: ;(display (rule20_Test 20))
+  12: ;(newline)
+  13: ;(newline)
+0 errors found in input file

@@ -1,0 +1,9 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/U2P2.ss
+   1: (define (test2)
+   2:   (< (> 5 <= 6) )
+Error at 2,12: '<=' unexpected 
+   3:   )
+Error at 3,4: 'LPAREN_T' expected 
+Error at 3,4: '' unexpected 
+Error at 3,4: '' unexpected 
+4 errors found in input file

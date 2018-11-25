@@ -1,0 +1,10 @@
+(define (main)
+  (display (cond (123 "test")))
+  (newline)
+  (display (and "test1" "test2"))
+  (newline)
+  (display (= (+ 5 5) 11))
+  (newline)
+  )
+
+(main)

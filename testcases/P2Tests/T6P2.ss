@@ -1,0 +1,18 @@
+(define (testCase x)
+	(cond(
+		'((number? x)(display "is a number"))
+		'((list? x)(display "is a list"))
+		'((string? x)(display "is a string"))
+		)
+		(else '(display "Not a number/list/string"))
+		)
+	(newline)
+	)
+(define (main)
+	(testCase 12)
+	(testCase '(a b c))
+	(testCase "A String")
+	(testCase '())
+	)
+        
+(main)

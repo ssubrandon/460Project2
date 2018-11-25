@@ -1,0 +1,13 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/Y13P2.ss
+   1: (define (rule22_Test t)
+   2:   (cond (0 t)
+   3: 	 )
+   4:   )
+   5: 
+   6: (rule22_Test 22)
+   7: 
+   8: ;(newline)
+   9: ;(display (rule22_Test 22))
+  10: ;(newline)
+  11: ;(newline)
+0 errors found in input file

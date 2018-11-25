@@ -1,0 +1,5 @@
+(define (func)
+  'define
+  )
+
+(hello)

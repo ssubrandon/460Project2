@@ -1,0 +1,7 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/T2P2.ss
+   1: (define (main)
+   2:   (cond (4 5) (else 'number?))
+   3: )
+   4: (main)
+   5: 
+0 errors found in input file

@@ -1,0 +1,19 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/Y16P2.ss
+   1: (define (main)
+   2:   (if (> 3 5) (display "5 is greater than 3")
+   3:       "3 not greater than 5"
+   4:   )
+   5:   (newline)
+   6: )
+   7: 
+   8: (define (showList)
+   9:   (display ('( + "p")))
+Error at 9,13: ''' unexpected 
+  10: )
+Error at 10,1: 'LPAREN_T' expected 
+Error at 10,1: ')' unexpected 
+  11: 
+  12: (main)
+  13: (showList)
+Error at 13,1: 'EOF_T' expected 
+4 errors found in input file

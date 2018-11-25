@@ -1,0 +1,12 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/Z5P2.ss
+   1: (define (GreaterCheck n)
+   2:   (display "will check if 2 is greater, less, or equal to your number")
+   3:   (cond ((> n 2) 'greater)
+   4: 	((< n 2) 'less)
+   5: 	(else 'equal))
+   6:   (newline)
+   7: )
+Error at 7,2: 'LPAREN_T' expected 
+Error at 7,2: '' unexpected 
+Error at 7,2: '' unexpected 
+3 errors found in input file

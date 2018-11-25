@@ -1,0 +1,18 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/W1P2.ss
+   1: (define (main)
+   2:     (display (+ 5 6))
+   3:     (newline)
+   4:     (display (number? 5) )
+   5:     (newline)
+   6:     (display (list? 9) )
+   7:     (newline)
+   8:     (display (zero? 0) )
+   9:     (newline)
+  10:     (display (null? 3) )
+  11:     (newline)
+  12:     (display (string? 2) )
+  13:     (newline)
+  14:     )
+  15: 
+  16: (main)
+0 errors found in input file

@@ -1,0 +1,6 @@
+(define (main)
+  (display ')
+  (display 'zero?)
+  (newline)
+)
+(main)

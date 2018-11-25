@@ -1,0 +1,10 @@
+(define (funk1)
+  (newline)
+  )
+(define(funk2 list1 list)
+  (cons list1 list2)
+  )
+(main
+ (display(and True True))
+ (display(or True False))
+ )

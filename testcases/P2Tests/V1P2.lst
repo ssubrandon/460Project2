@@ -1,0 +1,8 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/V1P2.ss
+   1: (define(tester_for_one)
+   2:   '(newline)
+   3:   )
+   4: (define(tester_for_two)
+   5:   for_two)
+   6: (two)
+0 errors found in input file
