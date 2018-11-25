@@ -295,7 +295,7 @@ int SyntacticalAnalyzer::param_list(){
 	else{ 
 		while(token != IDENT_T) {
 			errors++;
-			ReportError(string("expected a IDENT_T, but found  " + lex->GetTokenName(token)));
+			ReportError(string("expected a IDENT_T in paramList, but found  " + lex->GetTokenName(token)));
 			token = lex->GetToken();
 		}
 		ruleFile << "Applying Rule 16" << endl;
@@ -315,7 +315,7 @@ int SyntacticalAnalyzer::else_part(){
 	int errors = 0;
 	if (token == EOF_T) {
 		errors++;
-		ReportError(string("Reached an EOF_T but expected something else"));
+		ReportError(string("Reached an EOF_T but expected something else in else part"));
 		ruleFile << "else_part function complete. Current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	} // end EOF if 
@@ -348,7 +348,7 @@ int SyntacticalAnalyzer::stmt_pair(){
 	while(token != RPAREN_T){
 
 		errors++;
-		ReportError(string("expected a RPAREN_T, but found  " + lex->GetTokenName(token)));
+		ReportError(string("expected a RPAREN_T in stmtpair, but found  " + lex->GetTokenName(token)));
 		//lex->ReportError("It done broke! ");
 		//exit(1);
 		token = lex->GetToken();
@@ -370,7 +370,7 @@ int SyntacticalAnalyzer::stmt_pair_body(){
 		errors += stmt();
 		if (token != RPAREN_T){
 			errors++;
-			ReportError(string("expected a RPAREN_T, but found  " + lex->GetTokenName(token)));
+			ReportError(string("expected a RPAREN_T in stmt_pair_body, but found  " + lex->GetTokenName(token)));
 		}
 	}
 
@@ -380,7 +380,7 @@ int SyntacticalAnalyzer::stmt_pair_body(){
 		errors += stmt();
 		if (token != RPAREN_T){
 			errors++;
-			ReportError(string("expected a RPAREN_T, but found  " + lex->GetTokenName(token)));
+			ReportError(string("expected a RPAREN_T in stmt_pair_body, but found  " + lex->GetTokenName(token)));
 		}
 		token = lex->GetToken();
 		errors += stmt_pair();
@@ -439,7 +439,7 @@ int SyntacticalAnalyzer::action(){
 		
 		if (token != LPAREN_T){
 			errors++;
-			ReportError(string("LPAREN_T expected, but see " + lex->GetTokenName(token)));
+			ReportError(string("LPAREN_T expected in action, but see " + lex->GetTokenName(token)));
 		}
 		
 		token = lex->GetToken();
@@ -663,7 +663,7 @@ int SyntacticalAnalyzer::any_other_token(){
 			errors += more_tokens();
 			if(token != RPAREN_T){
 				errors++;
-				ReportError(string("Expected RPARENT_T, but found " + lex->GetTokenName(token)));
+				ReportError(string("Expected RPARENT_T in a_o_t, but found " + lex->GetTokenName(token)));
 			}
 			else token = lex->GetToken();
 			break;
