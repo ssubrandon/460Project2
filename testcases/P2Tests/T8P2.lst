@@ -1,0 +1,8 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/T8P2.ss
+   1: (define(main) 
+   2: 	(+ 5 9)
+   3: )
+   4: (main)
+   5: (display(main))
+Error at 5,1: 'EOF_T' expected 
+1 errors found in input file

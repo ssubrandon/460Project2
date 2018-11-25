@@ -1,0 +1,7 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/X6P2.ss
+   1: (define (fail)
+   2:   '(newline 'cadr 'define)
+   3:   )
+   4: 
+   5: (fail)
+0 errors found in input file

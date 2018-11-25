@@ -1,0 +1,18 @@
+error at line 6 expected literal, ident_t or lparen_t
+uses rules:
+1
+3
+4
+5
+6
+7
+12
+13
+26
+29
+48
+49
+50
+70
+71
+74

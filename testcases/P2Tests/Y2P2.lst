@@ -1,0 +1,12 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/Y2P2.ss
+   1: (define (main)
+   2:   (display (cond (123 "test")))
+   3:   (newline)
+   4:   (display (and "test1" "test2"))
+   5:   (newline)
+   6:   (display (= (+ 5 5) 11))
+   7:   (newline)
+   8:   )
+   9: 
+  10: (main)
+0 errors found in input file

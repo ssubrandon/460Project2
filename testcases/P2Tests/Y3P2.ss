@@ -1,0 +1,10 @@
+(define (main)
+  (display (cadr '(test 123)))
+  (newline)
+  (display (cond(cons '(test1 test2))))
+  (newline)
+  (display (not (= 5 6)))
+  (newline)
+  )
+
+(main)

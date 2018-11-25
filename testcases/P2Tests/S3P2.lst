@@ -1,0 +1,9 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/S3P2.ss
+   1: (define (test)
+   2:   (display (number? 14))
+   3:   a
+   4:   )
+Error at 4,4: 'LPAREN_T' expected 
+Error at 4,4: '' unexpected 
+Error at 4,4: '' unexpected 
+3 errors found in input file

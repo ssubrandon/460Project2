@@ -1,0 +1,8 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/T4P2.ss
+   1: (define (main)
+   2:   (cdr null? 'string? +)
+Error at 2,12: 'null?' unexpected 
+Error at 2,23: 'RPAREN_T' expected 
+Error at 2,23: '+' unexpected 
+   3: (main)
+3 errors found in input file

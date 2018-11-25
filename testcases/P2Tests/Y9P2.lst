@@ -1,0 +1,12 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/Y9P2.ss
+   1: (define (rule14_Test)
+   2:   '(ASingleQuoteStrLitViaMoreTokens)
+   3:   )
+   4: 
+   5: (rule14_Test)
+   6: 
+   7: ;(newline)
+   8: ;(display (rule14_Test))
+   9: ;(newline)
+  10: ;(newline)
+0 errors found in input file

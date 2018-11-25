@@ -1,0 +1,7 @@
+(define (GreaterCheck n)
+  (display "will check if 2 is greater, less, or equal to your number")
+  (cond ((> n 2) 'greater)
+	((< n 2) 'less)
+	(else 'equal))
+  (newline)
+)

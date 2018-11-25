@@ -1,0 +1,15 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/R2P2.ss
+   1: (define (identT_define2)
+   2:   ("quotedLit1" or)
+Error at 2,15: '"quotedLit1"' unexpected 
+   3:  )
+   4: (define (identT_define3)
+   5:   ("quotedLit2" (or (+)))
+Error at 5,15: '"quotedLit2"' unexpected 
+   6:  )
+Error at 6,2: 'LPAREN_T' expected 
+Error at 6,2: ')' unexpected 
+   7: (identT_moreDef2)_
+Error at 7,18: Invalid character found: _
+Error at 7,18: 'EOF_T' expected 
+6 errors found in input file

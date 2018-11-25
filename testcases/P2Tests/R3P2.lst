@@ -1,0 +1,6 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/R3P2.ss
+   1: (define (identT_define4 param1 param2)
+   2:   (actionIdent1)
+   3:  )
+   4: (identT_moreDef3)
+0 errors found in input file

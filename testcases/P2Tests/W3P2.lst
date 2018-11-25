@@ -1,0 +1,33 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/W3P2.ss
+   1: ; Group: W 
+   2: 
+   3: (define (what_is_this n)
+   4:   (cond   ((null? n) 'this_is_null)
+   5:           ((number? n) 'this_is_number)
+   6:           ((list? n) 'this_is_a_list)
+   7:           ((string? n) 'this_is_a_string)
+   8:           (else 'dont_know_what_this_is))
+   9:   )
+  10: (define (main)
+  11:   (display (what_is_this "word"))
+  12:   (newline)
+  13:   
+  14:   (display (what_is_this 14))
+  15:   (newline)
+  16:   
+  17:   (display (what_is_this '(a b c)))
+  18:   (newline)
+  19: 
+  20:   (display (what_is_this '()))
+  21:   (newline)
+  22:   
+  23:   (display (what_is_this 'foo))
+  24:   (newline)
+  25:   
+  26:   (display (what_is_this cdr))
+Error at 26,28: 'cdr' unexpected 
+  27:   (newline)
+  28:   )
+  29: 
+  30: (main)
+1 errors found in input file

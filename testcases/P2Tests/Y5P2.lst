@@ -1,0 +1,20 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/Y5P2.ss
+   1: (define (main)
+   2:   (cdr '(1 2 3))
+   3:   (f1)
+   4:   )
+   5: 
+   6: (define (f1)
+   7:   (and f2 f3)
+   8:   )
+   9: 
+  10: (define (f2)
+  11:   (* 5 -5)
+  12:   )
+  13: 
+  14: (define (f3)
+  15:   (round 24.67)
+  16:   )
+  17: 
+  18: (main)
+0 errors found in input file

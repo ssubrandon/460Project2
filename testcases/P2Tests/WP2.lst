@@ -1,0 +1,14 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/WP2.ss
+   1: (define (isNonZeroNumber n)
+   2:   (cond ((number? n)
+   3: 	(cond ((zero? n) 'This_is_zero)
+   4: 	      (else 'This_is_a_nonzero_number)
+   5: 	      ))
+   6:   (else 'NaN)
+   7:   )  
+   8: )
+   9: 
+  10: (display (isNonZeroNumber 1))
+Error at 10,8: 'display' unexpected 
+Error at 10,29: 'EOF_T' expected 
+2 errors found in input file

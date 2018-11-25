@@ -1,0 +1,51 @@
+Entering Program function; current token is: LPAREN_T, lexeme: (
+Using Rule 1
+Entering Define function; current token is: DEFINE_T, lexeme: define
+Using Rule 4
+Entering Param_List function; current token is: RPAREN_T, lexeme: )
+Using Rule 17
+Exiting Param_List function; current token is: RPAREN_T
+Entering Stmt function; current token is: LPAREN_T, lexeme: (
+Using Rule 9
+Entering Action function; current token is: IF_T, lexeme: if
+Using Rule 24
+Entering Stmt function; current token is: LPAREN_T, lexeme: (
+Using Rule 9
+Entering Action function; current token is: IF_T, lexeme: if
+Using Rule 24
+Entering Stmt function; current token is: IDENT_T, lexeme: test1
+Using Rule 8
+Exiting Stmt function; current token is: IDENT_T
+Entering Stmt function; current token is: IDENT_T, lexeme: test2
+Using Rule 8
+Exiting Stmt function; current token is: IDENT_T
+Entering Else_Part function; current token is: IDENT_T, lexeme: test3
+Using Rule 18
+Entering Stmt function; current token is: IDENT_T, lexeme: test3
+Using Rule 8
+Exiting Stmt function; current token is: RPAREN_T
+Exiting Else_Part function; current token is: RPAREN_T
+Exiting Action function; current token is: RPAREN_T
+Exiting Stmt function; current token is: NUMLIT_T
+Entering Stmt function; current token is: NUMLIT_T, lexeme: 1.1
+Using Rule 7
+Entering Literal function; current token is: NUMLIT_T, lexeme: 1.1
+Using Rule 10
+Exiting Literal function; current token is: RPAREN_T
+Exiting Stmt function; current token is: RPAREN_T
+Entering Else_Part function; current token is: RPAREN_T, lexeme: )
+Using Rule 19
+Exiting Else_Part function; current token is: RPAREN_T
+Exiting Action function; current token is: RPAREN_T
+Exiting Stmt function; current token is: RPAREN_T
+Entering Stmt_List function; current token is: RPAREN_T, lexeme: )
+Using Rule 6
+Exiting Stmt_List function; current token is: RPAREN_T
+Exiting Define function; current token is: LPAREN_T
+Entering More_Defines function; current token is: IDENT_T, lexeme: func2
+Using Rule 3
+Entering Stmt_List function; current token is: RPAREN_T, lexeme: )
+Using Rule 6
+Exiting Stmt_List function; current token is: RPAREN_T
+Exiting More_Defines function; current token is: EOF_T
+Exiting Program function; current token is: EOF_T

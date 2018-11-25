@@ -1,0 +1,108 @@
+Entering Program function; current token is: LPAREN_T, lexeme: (
+Using Rule 1
+Entering Define function; current token is: DEFINE_T, lexeme: define
+Using Rule 4
+Entering Param_List function; current token is: RPAREN_T, lexeme: )
+Using Rule 17
+Exiting Param_List function; current token is: RPAREN_T
+Entering Stmt function; current token is: LPAREN_T, lexeme: (
+Using Rule 9
+Entering Action function; current token is: NEWLINE_T, lexeme: newline
+Using Rule 49
+Exiting Action function; current token is: RPAREN_T
+Exiting Stmt function; current token is: LPAREN_T
+Entering Stmt_List function; current token is: LPAREN_T, lexeme: (
+Using Rule 5
+Entering Stmt function; current token is: LPAREN_T, lexeme: (
+Using Rule 9
+Entering Action function; current token is: IF_T, lexeme: if
+Using Rule 24
+Entering Stmt function; current token is: LPAREN_T, lexeme: (
+Using Rule 9
+Entering Action function; current token is: EQUALTO_T, lexeme: =
+Using Rule 42
+Entering Stmt_List function; current token is: NUMLIT_T, lexeme: 12
+Using Rule 5
+Entering Stmt function; current token is: NUMLIT_T, lexeme: 12
+Using Rule 7
+Entering Literal function; current token is: NUMLIT_T, lexeme: 12
+Using Rule 10
+Exiting Literal function; current token is: NUMLIT_T
+Exiting Stmt function; current token is: NUMLIT_T
+Entering Stmt_List function; current token is: NUMLIT_T, lexeme: 14
+Using Rule 5
+Entering Stmt function; current token is: NUMLIT_T, lexeme: 14
+Using Rule 7
+Entering Literal function; current token is: NUMLIT_T, lexeme: 14
+Using Rule 10
+Exiting Literal function; current token is: RPAREN_T
+Exiting Stmt function; current token is: RPAREN_T
+Entering Stmt_List function; current token is: RPAREN_T, lexeme: )
+Using Rule 6
+Exiting Stmt_List function; current token is: RPAREN_T
+Exiting Stmt_List function; current token is: RPAREN_T
+Exiting Stmt_List function; current token is: RPAREN_T
+Exiting Action function; current token is: RPAREN_T
+Exiting Stmt function; current token is: STRLIT_T
+Entering Stmt function; current token is: STRLIT_T, lexeme: "Is the semester over yet"
+Using Rule 7
+Entering Literal function; current token is: STRLIT_T, lexeme: "Is the semester over yet"
+Using Rule 11
+Exiting Literal function; current token is: STRLIT_T
+Exiting Stmt function; current token is: STRLIT_T
+Entering Else_Part function; current token is: STRLIT_T, lexeme: "four more weeks"
+Using Rule 18
+Entering Stmt function; current token is: STRLIT_T, lexeme: "four more weeks"
+Using Rule 7
+Entering Literal function; current token is: STRLIT_T, lexeme: "four more weeks"
+Using Rule 11
+Exiting Literal function; current token is: RPAREN_T
+Exiting Stmt function; current token is: RPAREN_T
+Exiting Else_Part function; current token is: RPAREN_T
+Exiting Action function; current token is: RPAREN_T
+Exiting Stmt function; current token is: LPAREN_T
+Entering Stmt_List function; current token is: LPAREN_T, lexeme: (
+Using Rule 5
+Entering Stmt function; current token is: LPAREN_T, lexeme: (
+Using Rule 9
+Entering Action function; current token is: NEWLINE_T, lexeme: newline
+Using Rule 49
+Exiting Action function; current token is: RPAREN_T
+Exiting Stmt function; current token is: LPAREN_T
+Entering Stmt_List function; current token is: LPAREN_T, lexeme: (
+Using Rule 5
+Entering Stmt function; current token is: LPAREN_T, lexeme: (
+Using Rule 9
+Entering Action function; current token is: DISPLAY_T, lexeme: display
+Using Rule 48
+Entering Stmt function; current token is: STRLIT_T, lexeme: "I have a cat"
+Using Rule 7
+Entering Literal function; current token is: STRLIT_T, lexeme: "I have a cat"
+Using Rule 11
+Exiting Literal function; current token is: RPAREN_T
+Exiting Stmt function; current token is: RPAREN_T
+Exiting Action function; current token is: RPAREN_T
+Exiting Stmt function; current token is: LPAREN_T
+Entering Stmt_List function; current token is: LPAREN_T, lexeme: (
+Using Rule 5
+Entering Stmt function; current token is: LPAREN_T, lexeme: (
+Using Rule 9
+Entering Action function; current token is: NEWLINE_T, lexeme: newline
+Using Rule 49
+Exiting Action function; current token is: RPAREN_T
+Exiting Stmt function; current token is: RPAREN_T
+Entering Stmt_List function; current token is: RPAREN_T, lexeme: )
+Using Rule 6
+Exiting Stmt_List function; current token is: RPAREN_T
+Exiting Stmt_List function; current token is: RPAREN_T
+Exiting Stmt_List function; current token is: RPAREN_T
+Exiting Stmt_List function; current token is: RPAREN_T
+Exiting Stmt_List function; current token is: RPAREN_T
+Exiting Define function; current token is: LPAREN_T
+Entering More_Defines function; current token is: IDENT_T, lexeme: main
+Using Rule 3
+Entering Stmt_List function; current token is: RPAREN_T, lexeme: )
+Using Rule 6
+Exiting Stmt_List function; current token is: RPAREN_T
+Exiting More_Defines function; current token is: EOF_T
+Exiting Program function; current token is: EOF_T
