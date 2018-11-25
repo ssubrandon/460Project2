@@ -1,3 +1,5 @@
+//Global TODO: 1) need to output to a different file (not input file from all of the functions)
+
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -5,13 +7,13 @@
 
 using namespace std;
 
-
 /// The GetTokenName() Function is given to us by Watts in her lexical.cpp
 
 SyntacticalAnalyzer::SyntacticalAnalyzer (char * filename)
-{
+{//TODO: needs output file.
 	lex = new LexicalAnalyzer (filename);
 	token_type t;
+
 	int i =0;
 	string file = "";
 	while( filename[i] != '.'){
@@ -31,11 +33,12 @@ SyntacticalAnalyzer::SyntacticalAnalyzer (char * filename)
 }
 
 SyntacticalAnalyzer::~SyntacticalAnalyzer ()
-{
+{//TODO: close output
 	delete lex;
 	listingFile.close();
 	debugFile.close();
 	ruleFile.close();
+
 }
 
 int SyntacticalAnalyzer::program(){
@@ -49,6 +52,7 @@ int SyntacticalAnalyzer::program(){
 		errors++;
 	}
 	token = lex->GetToken();
+
 	errors += define();
 
 	if(token != LPAREN_T){
@@ -63,6 +67,7 @@ int SyntacticalAnalyzer::program(){
 
 	} // end of if EOF
 	listingFile << "Function complete, current token is: " << lex ->GetTokenName (token) << endl;
+
 	return errors;
 
 }
@@ -79,6 +84,7 @@ int SyntacticalAnalyzer::more_defines(){
 		}
 		token = lex->GetToken();
 		listingFile << "more_defines function complete. Current token is: " << lex ->GetTokenName (token) << endl; 
+
 		return errors; 
 
 
@@ -94,6 +100,7 @@ int SyntacticalAnalyzer::more_defines(){
 
 	errors+= more_defines();
 	listingFile << "more_defines function complete. Current token is: " << lex ->GetTokenName (token) << endl;
+
 	return errors;
 
 }			
@@ -103,6 +110,7 @@ int SyntacticalAnalyzer::define(){
 	listingFile << "Start of  define. Current token is: " << lex->GetTokenName(token) <<  endl;
 
 	int errors = 0;
+
 
 	listingFile << " Applying  Rule 2" << endl;
 
@@ -139,6 +147,7 @@ int SyntacticalAnalyzer::define(){
 	token = lex->GetToken();
 	listingFile << "Define function complete. Current token is: " << lex->GetTokenName (token) << endl;
 
+
 	return errors;
 
 }
@@ -157,6 +166,7 @@ int SyntacticalAnalyzer::stmt_list(){
 	errors += stmt();
 	errors += stmt_list();
 	listingFile << "stmt_list function complete. Current token is: " << lex ->GetTokenName(token) << endl;
+
 	return errors;
 
 }
@@ -170,11 +180,13 @@ int SyntacticalAnalyzer::stmt(){
 		listingFile << "Applying Rule 8" << endl;
 		token = lex->GetToken();
 		listingFile << "stmt function complete. Current token is: " << lex->GetTokenName(token) << endl;
+
 		return errors;
 	}
 
 	if(token == LPAREN_T) {
 		listingFile << "Applying Rule 9" << endl;
+
 		token = lex->GetToken();
 		errors += action();
 
@@ -185,6 +197,7 @@ int SyntacticalAnalyzer::stmt(){
 	}
 	listingFile << "stmt function complete. Current token is: "
 		<< lex->GetTokenName(token) << endl;
+
 	return errors;
 
 }
@@ -225,6 +238,7 @@ int SyntacticalAnalyzer::more_tokens(){
 	// report error
 	listingFile << "more_tokens function complete. Current token is: " << lex->GetTokenName(token) << endl;
 	return errors;
+
 	}
 	*/
 	if (token == RPAREN_T) {
@@ -236,6 +250,7 @@ int SyntacticalAnalyzer::more_tokens(){
 	errors += any_other_token();
 	errors += more_tokens();
 	listingFile << "more_tokens function complete. Current token is: " << lex->GetTokenName(token) << endl;
+
 	return errors;
 
 }
@@ -248,6 +263,7 @@ int SyntacticalAnalyzer::quoted_lit(){
 	listingFile << "Applying Rule 13" << endl;
 	errors += any_other_token();
 	listingFile << "quoted_lit function complete. Current token is: " << lex->GetTokenName(token) << endl;
+
 	return errors;
 
 }			
@@ -256,6 +272,8 @@ int SyntacticalAnalyzer::param_list(){
 
 	//  listingFile << " param_list function complete. Current token is: " << lex->GetTokenName(token) << endl;
 	int errors = 0;
+
+ 
 
 	if(token == RPAREN_T) {
 		listingFile << "Applying Rule 17" << endl;    
@@ -295,6 +313,7 @@ int SyntacticalAnalyzer::else_part(){
 	listingFile << "Applying Rule 18" << endl;
 	errors += stmt();
 	listingFile << "else_part function complete. Current token is: " << lex->GetTokenName(token) << endl;
+
 	return errors;
 }
 
@@ -313,6 +332,7 @@ int SyntacticalAnalyzer::stmt_pair(){
 	listingFile << "Applying Rule 20" << endl;
 	errors += stmt_pair_body();
 	while(token != RPAREN_T){
+
 		errors++;
 		//lex->ReportError("It done broke! ");
 		//exit(1);
@@ -320,8 +340,8 @@ int SyntacticalAnalyzer::stmt_pair(){
 	} // end right paren if 
 	token = lex->GetToken();
 	listingFile << "stmt_pair function complete. Current token is: " << lex->GetTokenName(token) << endl;
-	return errors;
 
+	return errors;
 
 }
 
@@ -744,7 +764,7 @@ int SyntacticalAnalyzer::any_other_token(){
 		case SQUOTE_T:
 			ruleFile << "Applying Rule 79\n";
 			token = lex->GetToken();
-			errors += any_other_token;
+			errors += any_other_token();
 			break;
 		case COND_T:
 			ruleFile << "Applying Rule 80\n";
@@ -760,7 +780,7 @@ int SyntacticalAnalyzer::any_other_token(){
 			ReportError(string("No rule found in any_other_token function, current token is: " + lex->GetTokenName(token)));
 			token = lex->GetToken();
 	}
-	}	
+
 	//if the current token at this point is not apart of the follows then that is an error?
 	/*
 	while(!follows){
@@ -775,7 +795,7 @@ int SyntacticalAnalyzer::any_other_token(){
 }
 
 void SyntacticalAnalyzer::ReportError (const string & msg){
-	listingFile << "Syntax error at " << lex->get_line_num << ',' << lex->get_pos << ": " << msg << endl;
-	debugFile << "Syntax error at " << lex->get_line_num << ',' << lex->get_pos << ": " << msg << endl;
+  listingFile << "Syntax error at " << lex->get_line_num() << ',' << lex->get_pos() << ": " << msg << endl;
+  debugFile << "Syntax error at " << lex->get_line_num() << ',' << lex->get_pos() << ": " << msg << endl;
 
 }
