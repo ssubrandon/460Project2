@@ -168,6 +168,13 @@ int SyntacticalAnalyzer::stmt_list(){
 	ruleFile << "Starting stmt_List function. Current token is: " << lex->GetTokenName (token) << endl;
 
 	int errors = 0;
+	if(token == EOF_T){
+	  errors++;
+	  ReportError(string("EOF_T token detected ending function stmt_list"));
+	  ruleFile << "stmt_list function complete. Current token is: " << lex->GetTokenName(token) << endl;
+	  return errors;
+
+	}
 
 	if(token == RPAREN_T) {
 		ruleFile << "Applying Rule 6" << endl;
@@ -225,6 +232,7 @@ int SyntacticalAnalyzer::stmt(){
 		default: //no rule found
 			errors++;
 			ReportError(string("No rule found in stmt function, current token is: " + lex->GetTokenName(token)));
+			
 	}
 	ruleFile << "stmt function complete. Current token is: " << lex->GetTokenName(token) << endl;
 	return errors;	

@@ -1,0 +1,46 @@
+Input file: 01P2.ss
+   1: (define (main)
+	LPAREN_T        (
+	DEFINE_T        define
+	LPAREN_T        (
+	IDENT_T         main
+	RPAREN_T        )
+   2: 	(display "Hello World")
+	LPAREN_T        (
+	DISPLAY_T       display
+	STRLIT_T        "Hello World"
+	RPAREN_T        )
+Syntax error at 2,24: expected either NUMLIT_T, STRLIT_T, or SQUOTE_T in literal but got: RPAREN_T
+Syntax error at 2,24: expected either NUMLIT_T, STRLIT_T, or SQUOTE_T in literal but got: RPAREN_T
+Syntax error at 2,24: No rule found in stmt function, current token is: RPAREN_T
+   3: 	(newline)
+	LPAREN_T        (
+Syntax error at 3,2: expected either NUMLIT_T, STRLIT_T, or SQUOTE_T in literal but got: LPAREN_T
+Syntax error at 3,2: expected either NUMLIT_T, STRLIT_T, or SQUOTE_T in literal but got: LPAREN_T
+Syntax error at 3,2: expected either NUMLIT_T, STRLIT_T, or SQUOTE_T in literal but got: LPAREN_T
+Syntax error at 3,2: No rule found in stmt function, current token is: LPAREN_T
+	NEWLINE_T       newline
+	RPAREN_T        )
+   4: )
+	RPAREN_T        )
+Syntax error at 4,1: expected either NUMLIT_T, STRLIT_T, or SQUOTE_T in literal but got: RPAREN_T
+Syntax error at 4,1: expected either NUMLIT_T, STRLIT_T, or SQUOTE_T in literal but got: RPAREN_T
+Syntax error at 4,1: expected either NUMLIT_T, STRLIT_T, or SQUOTE_T in literal but got: RPAREN_T
+Syntax error at 4,1: No rule found in stmt function, current token is: RPAREN_T
+   5: 
+   6: (main)
+	LPAREN_T        (
+	IDENT_T         main
+	RPAREN_T        )
+	EOF_T           
+Syntax error at 6,7: no rule found in action, curren token is EOF_T
+	EOF_T           
+Syntax error at 6,7: RPAREN_T expected in stmt function, current token is: EOF_T
+Syntax error at 6,7: expected either NUMLIT_T, STRLIT_T, or SQUOTE_T in literal but got: EOF_T
+Syntax error at 6,7: expected either NUMLIT_T, STRLIT_T, or SQUOTE_T in literal but got: EOF_T
+Syntax error at 6,7: expected either NUMLIT_T, STRLIT_T, or SQUOTE_T in literal but got: EOF_T
+Syntax error at 6,7: No rule found in stmt function, current token is: EOF_T
+Syntax error at 6,7: EOF_T token detected ending function stmt_list
+Syntax error at 6,7: expected a RPAREN_T in m_d, but found  EOF_T
+	EOF_T           
+0 errors found in input file
