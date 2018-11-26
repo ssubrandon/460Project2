@@ -83,7 +83,6 @@ int SyntacticalAnalyzer::more_defines(){
 	int errors = 0;
 	if(token == IDENT_T){
 		ruleFile << "Using Rule 3" << endl;
-		token = lex->GetToken();
 		errors += stmt_list();
 		if(token != RPAREN_T){
 			errors++;
@@ -204,7 +203,8 @@ int SyntacticalAnalyzer::stmt(){
 		case IDENT_T:
 			ruleFile << "Using Rule 8" << endl;
 			token = lex->GetToken();
-			break;
+			ruleFile << "Exiting stmt_list function; current token is: " << lex ->GetTokenName (token) << endl;
+			return errors;
 
 
 		case LPAREN_T:
@@ -219,32 +219,37 @@ int SyntacticalAnalyzer::stmt(){
 			else{
 				ReportError(string("RPAREN_T expected in stmt function, current token is: " + lex->GetTokenName(token)));
 			}
-			break;
+			ruleFile << "Exiting stmt_list function; current token is: " << lex ->GetTokenName (token) << endl;
+			return errors;
 
 
 		case NUMLIT_T: 
 			ruleFile << "stmt function complete. Current token is: " << lex->GetTokenName(token) << endl;
 			ruleFile << "Using Rule 7"  << endl;
 			errors += literal();
-			break;
+			ruleFile << "Exiting stmt_list function; current token is: " << lex ->GetTokenName (token) << endl;
+			return errors;
 
 		case STRLIT_T:
 			//ruleFile << "stmt function complete. Current token is: " << lex->GetTokenName(token) << endl;
 			ruleFile << "Using Rule 7"  << endl;
 			errors += literal();
-			break;
+			ruleFile << "Exiting stmt_list function; current token is: " << lex ->GetTokenName (token) << endl;
+			return errors;
 
 		case SQUOTE_T:
 			//ruleFile << "stmt function complete. Current token is: " << lex->GetTokenName(token) << endl;
 			ruleFile << "Using Rule 7"  << endl;
 			errors += literal();
-			break;
+			ruleFile << "Exiting stmt_list function; current token is: " << lex ->GetTokenName (token) << endl;
+			return errors;
 
 			
 		default: //no rule found
 			errors++;
 			ReportError(string("No rule found in stmt function, current token is: " + lex->GetTokenName(token)));
-			break;
+			ruleFile << "Exiting stmt_list function; current token is: " << lex ->GetTokenName (token) << endl;
+			return errors;
 
 	}
 	ruleFile << "Exiting stmt_list function; current token is: " << lex ->GetTokenName (token) << endl;
@@ -263,12 +268,12 @@ int SyntacticalAnalyzer::literal(){
 		ruleFile << "Using Rule 10" << endl;
 		token = lex->GetToken();
 	}
-	if (token == STRLIT_T)
+	else if (token == STRLIT_T)
 	{
 		ruleFile << "Using Rule 11" << endl;
 		token = lex->GetToken();
 	}
-	if ( token == SQUOTE_T )
+	else if ( token == SQUOTE_T )
 	{
 		ruleFile << "Using Rule 12" << endl;
 		ruleFile << "literal function complete. Current token is: " << lex->GetTokenName(token) << endl;
@@ -276,10 +281,8 @@ int SyntacticalAnalyzer::literal(){
 		errors += quoted_lit(); 
 	}
 	else{
-	  if ( token != RPAREN_T){
-	    errors++;
-	    ReportError(string("expected either NUMLIT_T, STRLIT_T, or SQUOTE_T in literal but got: " + lex->GetTokenName(token)));
-	  }
+		errors++;
+		ReportError(string("expected either NUMLIT_T, STRLIT_T, or SQUOTE_T in literal but got: " + lex->GetTokenName(token)));
 	}
 	ruleFile << "Exiting literal function; current token is: " << lex ->GetTokenName (token) << endl;
 	return errors;
