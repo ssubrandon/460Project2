@@ -5,37 +5,47 @@ Start of  define. Current token is: DEFINE_T
  param_list function starting. Current token is: RPAREN_T
 Applying Rule 17
 param_list function complete. Current token is: RPAREN_T
-Starting stmt function. Current token is: LPAREN_T
-Applying Rule 9
-Entering Action function; current token is: DISPLAY_T
-Applying Rule 48
-Starting stmt function. Current token is: STRLIT_T
+Starting stmt function. Current token is: NUMLIT_T
+stmt function complete. Current token is: NUMLIT_T
 Applying Rule 7
-Entering literal function; current token is: STRLIT_T
-Applying Rule 11
+Entering literal function; current token is: NUMLIT_T
+Applying Rule 10
+literal function complete. Current token is: RPAREN_T
+Applying Rule 7
+Entering literal function; current token is: RPAREN_T
 literal function complete. Current token is: RPAREN_T
 Applying Rule 7
 Entering literal function; current token is: RPAREN_T
 literal function complete. Current token is: RPAREN_T
 stmt function complete. Current token is: RPAREN_T
-Exiting Action function; current token is: RPAREN_T
-stmt function complete. Current token is: LPAREN_T
-Applying Rule 7
-Entering literal function; current token is: LPAREN_T
-literal function complete. Current token is: LPAREN_T
-Applying Rule 7
-Entering literal function; current token is: LPAREN_T
-literal function complete. Current token is: LPAREN_T
-Applying Rule 7
-Entering literal function; current token is: LPAREN_T
-literal function complete. Current token is: LPAREN_T
-stmt function complete. Current token is: LPAREN_T
-Starting stmt_List function. Current token is: LPAREN_T
-Applying Rule 5
+Starting stmt_List function. Current token is: RPAREN_T
+Applying Rule 6
+stmt_list function complete. Current token is: RPAREN_T
+Define function complete. Current token is: LPAREN_T
+Starting more_defines function. Current token is: DEFINE_T
+Applying Rule 2
+Start of  define. Current token is: DEFINE_T
+ Applying  Rule 2
+ param_list function starting. Current token is: RPAREN_T
+Applying Rule 17
+param_list function complete. Current token is: RPAREN_T
 Starting stmt function. Current token is: LPAREN_T
 Applying Rule 9
-Entering Action function; current token is: NEWLINE_T
-Applying Rule 49
+Entering Action function; current token is: NUMBERP_T
+Applying Rule 31
+Starting stmt function. Current token is: NUMLIT_T
+stmt function complete. Current token is: NUMLIT_T
+Applying Rule 7
+Entering literal function; current token is: NUMLIT_T
+Applying Rule 10
+literal function complete. Current token is: RPAREN_T
+Applying Rule 7
+Entering literal function; current token is: RPAREN_T
+literal function complete. Current token is: RPAREN_T
+Applying Rule 7
+Entering literal function; current token is: RPAREN_T
+literal function complete. Current token is: RPAREN_T
+stmt function complete. Current token is: RPAREN_T
 Exiting Action function; current token is: RPAREN_T
 stmt function complete. Current token is: RPAREN_T
 Applying Rule 7
@@ -50,7 +60,6 @@ literal function complete. Current token is: RPAREN_T
 stmt function complete. Current token is: RPAREN_T
 Starting stmt_List function. Current token is: RPAREN_T
 Applying Rule 6
-stmt_list function complete. Current token is: RPAREN_T
 stmt_list function complete. Current token is: RPAREN_T
 Define function complete. Current token is: LPAREN_T
 Starting more_defines function. Current token is: IDENT_T
@@ -76,5 +85,6 @@ stmt function complete. Current token is: EOF_T
 Starting stmt_List function. Current token is: EOF_T
 stmt_list function complete. Current token is: EOF_T
 stmt_list function complete. Current token is: EOF_T
+more_defines function complete. Current token is: EOF_T
 more_defines function complete. Current token is: EOF_T
 Function complete, current token is: EOF_T

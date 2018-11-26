@@ -1,0 +1,9 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/R1P2.ss
+   1: (define (identT_define1) 
+   2:   123
+   3:  )
+   4: (define (identT_defin2)
+   5:   (number? 10)
+   6:   )
+   7: (identT_moreDef1)
+0 errors found in input file
