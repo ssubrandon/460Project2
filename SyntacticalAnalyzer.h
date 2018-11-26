@@ -28,6 +28,7 @@ class SyntacticalAnalyzer
         int any_other_token();
 	void ReportError (const string & msg);
     private:
+	int errors;
 	LexicalAnalyzer * lex;
 	token_type token;
 	ifstream input;

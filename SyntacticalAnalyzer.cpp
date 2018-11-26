@@ -28,16 +28,16 @@ SyntacticalAnalyzer::SyntacticalAnalyzer (char * filename)
 	token = lex -> GetToken();
 	ruleFile.open(file + ".Zp2");
 
-	program ();
+	errors = program();
 }
 
 SyntacticalAnalyzer::~SyntacticalAnalyzer ()
 {// this is the deconstructor for the syntactical analyzer class
+  cout << errors << " Syntactical errors found in input file\n";
+	lex->listing << errors << " Syntactical errors found in input file\n";
+	lex->debug << errors << " Syntactical errors found in input file\n";
+  ruleFile.close();
 	delete lex;
-	//listingFile.close();
-	//debugFile.close();
-	ruleFile.close();
-
 }
 
 int SyntacticalAnalyzer::program(){
