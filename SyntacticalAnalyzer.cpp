@@ -31,17 +31,16 @@ SyntacticalAnalyzer::SyntacticalAnalyzer (char * filename)
 	//lex->listing
 	//lex->debug
 	// GetLexeme()?
-	program ();
-
+	errors = program();
 }
 
 SyntacticalAnalyzer::~SyntacticalAnalyzer ()
 {//TODO: close output
-	delete lex;
-	//listingFile.close();
-	//debugFile.close();
+	cout << errors << " Syntactical errors found in input file\n";
+	lex->listing << errors << " Syntactical errors found in input file\n";
+	lex->debug << errors << " Syntactical errors found in input file\n";
 	ruleFile.close();
-
+	delete lex;
 }
 
 int SyntacticalAnalyzer::program(){

@@ -137,10 +137,10 @@ LexicalAnalyzer::LexicalAnalyzer (char * filename)
 LexicalAnalyzer::~LexicalAnalyzer ()
 {
 	input.close ();
-	cout << errors << " errors found in input file\n";
-	listing << errors << " errors found in input file\n";
+	cout << errors << " Lexical errors found in input file\n";
+	listing << errors << " Lexical errors found in input file\n";
 	listing.close();
-	debug << errors << " errors found in input file\n";
+	debug << errors << " Lexical errors found in input file\n";
 	debug.close();
 }
 
