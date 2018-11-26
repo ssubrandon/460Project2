@@ -14,10 +14,8 @@
 
 using namespace std;
 
-/// The GetTokenName() Function is given to us by Watts in her lexical.cpp
-
 SyntacticalAnalyzer::SyntacticalAnalyzer (char * filename)
-{//TODO: needs output file.
+{
 	lex = new LexicalAnalyzer (filename);
 	token_type t;
 
@@ -29,12 +27,8 @@ SyntacticalAnalyzer::SyntacticalAnalyzer (char * filename)
 	}
 	token = lex -> GetToken();
 	ruleFile.open(file + ".Zp2");
-	//listingFile.open(file +"Z.lst");
-	// debugFile.open(file + "Z.dbg"); 
 
-	
 	program ();
-
 }
 
 SyntacticalAnalyzer::~SyntacticalAnalyzer ()
@@ -50,9 +44,9 @@ int SyntacticalAnalyzer::program(){
   //This is the program function and is also rule one of our language this will check for
   //correct syntax and send the program off to the next rule using recursion.
 
-	ruleFile  << "Current token is: " << lex ->GetTokenName (token) <<  endl; 
+	ruleFile  << "Entering Program function; current token is: " << lex ->GetTokenName (token) << ", lexeme: " << lex->GetLexeme() <<  endl; 
 	int errors = 0;
-	ruleFile << "Applying Rule 1" << endl;
+	ruleFile << "Using Rule 1" << endl;
 
 	if(token != LPAREN_T){
 		errors++;
@@ -74,7 +68,7 @@ int SyntacticalAnalyzer::program(){
 		
 
 	} // end of if EOF
-	ruleFile << "Function complete, current token is: " << lex ->GetTokenName (token) << endl;
+	ruleFile << "Exiting Program function; current token is: " << lex ->GetTokenName (token) << endl;
 
 	return errors;
 
@@ -84,24 +78,24 @@ int SyntacticalAnalyzer::more_defines(){
   //This function more-defines deals with the more_defines rules( 2-3) and will check for syntactical correctness,
   //this function will, depending on the token seen, send the program too define, stmt, or stmt-list for
   //further analyzing.
-	ruleFile << "Starting more_defines function. Current token is: " << lex ->GetTokenName(token) << endl;
+	ruleFile << "Entering more_defines function; Current token is: " << lex ->GetTokenName(token) << ", lexeme: " << lex->GetLexeme() << endl;
+
 	int errors = 0;
 	if(token == IDENT_T){
-		ruleFile << "Applying Rule 3" << endl;
+		ruleFile << "Using Rule 3" << endl;
 		errors += stmt_list();
 		if(token != RPAREN_T){
 			errors++;
 			ReportError(string("expected a RPAREN_T in m_d, but found  " + lex->GetTokenName(token)));
 		}
 		token = lex->GetToken();
-		ruleFile << "more_defines function complete. Current token is: " << lex ->GetTokenName (token) << endl; 
+		ruleFile << "Exiting more_defines function; Current token is: " << lex ->GetTokenName (token) << endl; 
 
 		return errors; 
 
+	} 
 
-	} // end left paren. if 
-
-	ruleFile << "Applying Rule 2" << endl;
+	ruleFile << "Using Rule 2" << endl;
 	errors += define();
 
 	if(token != LPAREN_T){
@@ -111,7 +105,7 @@ int SyntacticalAnalyzer::more_defines(){
 	token = lex->GetToken();
 
 	errors+= more_defines();
-	ruleFile << "more_defines function complete. Current token is: " << lex ->GetTokenName (token) << endl;
+	ruleFile << "Exiting more_defines function; current token is: " << lex ->GetTokenName (token) << endl;
 
 	return errors;
 
@@ -121,14 +115,11 @@ int SyntacticalAnalyzer::define(){
   //This function deals with the defines rules(4) and will check for syntactical correctness,
   //this function will, depending on the token seen, send the program to param_list after
   //checking for the presence of some needed tokens for this rule.
-
-	ruleFile << "Start of  define. Current token is: " << lex->GetTokenName(token) <<  endl;
+  ruleFile << "Entering define function; Current token is: " << lex ->GetTokenName(token) << ", lexeme: " << lex->GetLexeme() << endl;
 
 	int errors = 0;
 
-
-	ruleFile << " Applying  Rule 2" << endl;
-
+	ruleFile << "Using  Rule 2" << endl;
 
 	if(token != DEFINE_T){
 		errors++;
@@ -165,7 +156,7 @@ int SyntacticalAnalyzer::define(){
 		ReportError(string("expected a RPAREN_T in define, but found  " + lex->GetTokenName(token)));
 	}
 	token = lex->GetToken();
-	ruleFile << "Define function complete. Current token is: " << lex->GetTokenName (token) << endl;
+	ruleFile << "Exiting Define function; current token is: " << lex ->GetTokenName (token) << endl;
 
 
 	return errors;
@@ -176,28 +167,26 @@ int SyntacticalAnalyzer::stmt_list(){
   //This function deals with the stmt_list rules(5-6) and will check for syntactical correctness,
   //this function will then, depending on the token seen, send the program to stmt and stmt list
   // or will return after seeing nothing in the file.
- 
-
-	ruleFile << "Starting stmt_List function. Current token is: " << lex->GetTokenName (token) << endl;
+	ruleFile << "Entering stmt_list function; Current token is: " << lex ->GetTokenName(token) << ", lexeme: " << lex->GetLexeme() << endl;
 
 	int errors = 0;
 	if(token == EOF_T){
-	  errors++;
-	  ReportError(string("EOF_T token detected ending function stmt_list"));
-	  ruleFile << "stmt_list function complete. Current token is: " << lex->GetTokenName(token) << endl;
-	  return errors;
+		errors++;
+		ReportError(string("EOF_T token detected ending function stmt_list"));
+		ruleFile << "Exiting stmt_list function; current token is: " << lex ->GetTokenName (token) << endl;
+		return errors;
 
 	}
 
 	if(token == RPAREN_T) {
-		ruleFile << "Applying Rule 6" << endl;
-		ruleFile << "stmt_list function complete. Current token is: " << lex->GetTokenName(token) << endl;
+		ruleFile << "Using Rule 6" << endl;
+		ruleFile << "Exiting stmt_list function; current token is: " << lex ->GetTokenName (token) << endl;
 		return errors;
-	} // End of Right paren if 
-	ruleFile << "Applying Rule 5" << endl;
+	} 
+	ruleFile << "Using Rule 5" << endl;
 	errors += stmt();
 	errors += stmt_list();
-	ruleFile << "stmt_list function complete. Current token is: " << lex ->GetTokenName(token) << endl;
+	ruleFile << "Exiting stmt_list function; current token is: " << lex ->GetTokenName (token) << endl;
 
 	return errors;
 
@@ -206,19 +195,17 @@ int SyntacticalAnalyzer::stmt_list(){
 int SyntacticalAnalyzer::stmt(){
   //This function deals with the stmt rules (7-9) and will check for syntactical correctness,
   //this function will then, depending on the token seen, send the program to literal, action, or will return. 
- 
-
-	ruleFile << "Starting stmt function. Current token is: " << lex->GetTokenName (token) << endl;
+	ruleFile << "Entering stmt function; Current token is: " << lex ->GetTokenName(token) << ", lexeme: " << lex->GetLexeme() << endl;
 
 	int errors = 0;
 
 	switch(token){
 		case IDENT_T:
-			ruleFile << "Applying Rule 8" << endl;
+			ruleFile << "Using Rule 8" << endl;
 			token = lex->GetToken();
 
 		case LPAREN_T:
-			ruleFile << "Applying Rule 9" << endl;
+			ruleFile << "Using Rule 9" << endl;
 			//ruleFile << "stmt function complete. Current token is: " << lex->GetTokenName(token) << endl;
 			token = lex->GetToken();
 			errors += action();
@@ -232,53 +219,48 @@ int SyntacticalAnalyzer::stmt(){
 
 		case NUMLIT_T: 
 			ruleFile << "stmt function complete. Current token is: " << lex->GetTokenName(token) << endl;
-			ruleFile << "Applying Rule 7"  << endl;
+			ruleFile << "Using Rule 7"  << endl;
 			errors += literal();
 
 		case STRLIT_T:
 			//ruleFile << "stmt function complete. Current token is: " << lex->GetTokenName(token) << endl;
-			ruleFile << "Applying Rule 7"  << endl;
+			ruleFile << "Using Rule 7"  << endl;
 			errors += literal();
 
 		case SQUOTE_T:
 			//ruleFile << "stmt function complete. Current token is: " << lex->GetTokenName(token) << endl;
-			ruleFile << "Applying Rule 7"  << endl;
+			ruleFile << "Using Rule 7"  << endl;
 			errors += literal();
 
 		default: //no rule found
 			errors++;
 			ReportError(string("No rule found in stmt function, current token is: " + lex->GetTokenName(token)));
-			
+
 	}
-	ruleFile << "stmt function complete. Current token is: " << lex->GetTokenName(token) << endl;
+	ruleFile << "Exiting stmt_list function; current token is: " << lex ->GetTokenName (token) << endl;
 	return errors;	
 }
 
 int SyntacticalAnalyzer::literal(){
   //This function deals with the literal rules (10-12) and will check for syntactical correctness,
   //this function will then, depending on the token seen, send the program to quoted lit or return.
+	ruleFile << "Entering literal function; Current token is: " << lex ->GetTokenName(token) << ", lexeme: " << lex->GetLexeme() << endl;
 
-	ruleFile << "Entering literal function; current token is: " << lex->GetTokenName(token) << endl;
 	int errors =0;
-	/*
-	if (token != SQUOTE_T && token != NUMLIT_T && token != STRLIT_T){
-		errors ++;
-		//token = lex->GetToken();
-	}
-	*/
+	
 	if (token == NUMLIT_T)
 	{ 
-		ruleFile << "Applying Rule 10" << endl;
+		ruleFile << "Using Rule 10" << endl;
 		token = lex->GetToken();
 	}
 	if (token == STRLIT_T)
 	{
-		ruleFile << "Applying Rule 11" << endl;
+		ruleFile << "Using Rule 11" << endl;
 		token = lex->GetToken();
 	}
 	if ( token == SQUOTE_T )
 	{
-		ruleFile << "Applying Rule 12" << endl;
+		ruleFile << "Using Rule 12" << endl;
 		ruleFile << "literal function complete. Current token is: " << lex->GetTokenName(token) << endl;
 		token = lex->GetToken();
 		errors += quoted_lit(); 
@@ -287,7 +269,7 @@ int SyntacticalAnalyzer::literal(){
 		errors++;
 		ReportError(string("expected either NUMLIT_T, STRLIT_T, or SQUOTE_T in literal but got: " + lex->GetTokenName(token)));
 	}
-	ruleFile << "literal function complete. Current token is: " << lex->GetTokenName(token) << endl;
+	ruleFile << "Exiting literal function; current token is: " << lex ->GetTokenName (token) << endl;
 	return errors;
 }
 
@@ -295,9 +277,8 @@ int SyntacticalAnalyzer::more_tokens(){
   //This function deals with the more-tokens rules (14-15) and will check for syntactical correctness,
   //this function will then, depending on the token seen, send the program to anyother tokens, more tokens,
   // or will return.
-
-	ruleFile << "Entering More_Tokens function; current token is: " << lex->GetTokenName(token) << endl;
-
+	ruleFile << "Entering more_tokens function; Current token is: " << lex ->GetTokenName(token) << ", lexeme: " << lex->GetLexeme() << endl;
+  
 	int errors = 0;
 	
 	if (token == EOF_T){
@@ -307,85 +288,77 @@ int SyntacticalAnalyzer::more_tokens(){
 	}
 	
 	if (token == RPAREN_T) {
-		ruleFile << "Applying Rule 15" << endl;
-		ruleFile << "more_tokens function complete. Current token is: " << lex->GetTokenName(token) << endl;
+		ruleFile << "Using Rule 15" << endl;
+		ruleFile << "Exiting more_tokens function; current token is: " << lex ->GetTokenName (token) << endl;
 		return errors;
 	}
-	ruleFile << "Applying Rule 14" << endl;
+	ruleFile << "Using Rule 14" << endl;
 	errors += any_other_token();
 	errors += more_tokens();
-	ruleFile << "more_tokens function complete. Current token is: " << lex->GetTokenName(token) << endl;
+	ruleFile << "Exiting more_tokens function; current token is: " << lex ->GetTokenName (token) << endl;
 
 	return errors;
-
 }
 
 int SyntacticalAnalyzer::quoted_lit(){
-    //This function deals with the quoted_lit rules (13) and will check for syntactical correctness,
+   //This function deals with the quoted_lit rules (13) and will check for syntactical correctness,
   //this function will then, depending on the token seen, send the program to any other token.
+	ruleFile << "Entering quoted_lit function; Current token is: " << lex ->GetTokenName(token) << ", lexeme: " << lex->GetLexeme() << endl;
 
 	int errors = 0;
-	ruleFile << "Starting quoted_lit function. Current token is: " << lex->GetTokenName(token) << endl;
-
-	ruleFile << "Applying Rule 13" << endl;
+	ruleFile << "Using Rule 13" << endl;
 	errors += any_other_token();
-	ruleFile << "quoted_lit function complete. Current token is: " << lex->GetTokenName(token) << endl;
+	ruleFile << "Exiting quoted_lit function; current token is: " << lex ->GetTokenName (token) << endl;
 
 	return errors;
-
 }			
 
 int SyntacticalAnalyzer::param_list(){
   //This function deals with the param_list rules (16-17) and will check for syntactical correctness,
   //this function will then, depending on the token seen, send the program to param_list or return.
+  ruleFile << "Entering param_list function; Current token is: " << lex ->GetTokenName(token) << ", lexeme: " << lex->GetLexeme() << endl;
 
-
-	ruleFile << " param_list function starting. Current token is: " << lex->GetTokenName(token) << endl;
 	int errors = 0;
 
- 
-
 	if(token == RPAREN_T) {
-		ruleFile << "Applying Rule 17" << endl;    
-		ruleFile << "param_list function complete. Current token is: " << lex->GetTokenName (token) << endl;
+		ruleFile << "Using Rule 17" << endl;    
+		ruleFile << "Exiting param_list function; current token is: " << lex ->GetTokenName (token) << endl;
 		return errors;
 	}
 	else if (token == IDENT_T){
-		ruleFile << "param_list function complete. Current token is: " << lex->GetTokenName (token) << endl;
-		ruleFile << "Applying Rule 16" << endl;
+		ruleFile << "Using Rule 16" << endl;
 		token = lex->GetToken();
 		errors += param_list();
 	}
 	else{//we have an error
 		errors++;
 		ReportError(string("expected a IDENT_T or RPAREN_T in paramList, but found  " + lex->GetTokenName(token)));
+		ruleFile << "Exiting param_list function; current token is: " << lex ->GetTokenName (token) << endl;
 		return errors;
-		ruleFile << "param_list function complete. Current token is: " << lex->GetTokenName(token) << endl;
 	}
+	ruleFile << "Exiting param_list function; current token is: " << lex ->GetTokenName (token) << endl;
 }
-
 
 int SyntacticalAnalyzer::else_part(){
   //This function deals with the else part rules (18-19) and will check for syntactical correctness,
   //this function will then, depending on the token seen, send the program to stmt ot return.
-
-	ruleFile << "Starting else_part function. Current token is: " << lex->GetTokenName(token) << endl;
+	ruleFile << "Entering else_part function; Current token is: " << lex ->GetTokenName(token) << ", lexeme: " << lex->GetLexeme() << endl;
 
 	int errors = 0;
 	if (token == EOF_T) {
 		errors++;
 		ReportError(string("Reached an EOF_T but expected something else in else part"));
-		ruleFile << "else_part function complete. Current token is: " << lex->GetTokenName(token) << endl;
+		ruleFile << "Exiting else_part function; current token is: " << lex ->GetTokenName (token) << endl;
 		return errors;
 	} // end EOF if 
 	if (token == RPAREN_T) {
-		ruleFile << "Applying Rule 19" << endl;
-		ruleFile << "else_part function complete. Current token is: " << lex->GetTokenName(token) << endl;
+		ruleFile << "Using Rule 19" << endl;
+		ruleFile << "Exiting else_part function; current token is: " << lex ->GetTokenName (token) << endl;
 		return errors;
 	} // end Right paren if  
-	ruleFile << "Applying Rule 18" << endl;
+	ruleFile << "Using Rule 18" << endl;
 	errors += stmt();
-	ruleFile << "else_part function complete. Current token is: " << lex->GetTokenName(token) << endl;
+	ruleFile << "Exiting else_part function; current token is: " << lex ->GetTokenName (token) << endl;
 
 	return errors;
 }
@@ -393,8 +366,7 @@ int SyntacticalAnalyzer::else_part(){
 int SyntacticalAnalyzer::stmt_pair(){
   //This function deals with the stmt_pair rules (20-21) and will check for syntactical correctness,
   //this function will then, depending on the token seen, send the program to stmt_pair_body or will return.
-
-	ruleFile << "Entering Stmt_Pair function; current token is: " << lex->GetTokenName(token) << endl;
+	ruleFile << "Entering stmt_pair function; Current token is: " << lex ->GetTokenName(token) << ", lexeme: " << lex->GetLexeme() << endl;
 
 	int errors = 0;
 	if(token != LPAREN_T){
@@ -402,7 +374,7 @@ int SyntacticalAnalyzer::stmt_pair(){
 		token = lex->GetToken();	
 	} // end left paren if
 	token = lex->GetToken();
-	ruleFile << "Applying Rule 20" << endl;
+	ruleFile << "Using Rule 20" << endl;
 	errors += stmt_pair_body();
 	while(token != RPAREN_T){
 
@@ -411,7 +383,7 @@ int SyntacticalAnalyzer::stmt_pair(){
 		token = lex->GetToken();
 	} // end right paren if 
 	token = lex->GetToken();
-	ruleFile << "stmt_pair function complete. Current token is: " << lex->GetTokenName(token) << endl;
+	ruleFile << "Exiting stmt_pair function; current token is: " << lex ->GetTokenName (token) << endl;
 
 	return errors;
 
@@ -421,8 +393,8 @@ int SyntacticalAnalyzer::stmt_pair_body(){
   //This function deals with the stmt_pair_body rules (22-23) and will check for syntactical correctness,
   //this function will then, depending on the token seen, send the program to stmt, stmt, and stmt_par, or
   // just stmt.
+	ruleFile << "Entering stmt_pair_body function; Current token is: " << lex ->GetTokenName(token) << ", lexeme: " << lex->GetLexeme() << endl;
 
-	ruleFile << "Starting stmt_pair_body function. Current token is: " << lex->GetTokenName(token)<< endl;
 	int errors = 0;
 	if (token == ELSE_T){
 		//rule 23
@@ -446,234 +418,234 @@ int SyntacticalAnalyzer::stmt_pair_body(){
 		errors += stmt_pair();
 	}
 
-
 	ruleFile << "Exiting Stmt_Pair_Body function; current token is: " << lex->GetTokenName(token) << endl;
-	return errors;
 
+	return errors;
 }
 
 int SyntacticalAnalyzer::action(){
   //This function deals with the action rules (24-49) and will check for syntactical correctness,
   //this function will then, depending on the token seen, send the program to stmt, stmt-list, stmt and stmt-list, or return. 
+  ruleFile << "Entering Action function; Current token is: " << lex ->GetTokenName(token) << ", lexeme: " << lex->GetLexeme() << endl;
+
 	int errors = 0;
-	ruleFile << "Entering Action function; current token is: " << lex->GetTokenName(token) << endl;
 	if (token == IF_T)
 	{//applying rule 24
-		ruleFile << "Applying Rule 24" << endl;
+		ruleFile << "Using Rule 24" << endl;
 		token = lex->GetToken();
 		errors += stmt();
 		errors += stmt();
 		errors+= else_part();
-		ruleFile << "Exiting Action function; current token is: " << lex->GetTokenName(token) << endl;
+		ruleFile << "Exiting action function; current token is: " << lex ->GetTokenName (token) << endl;
 		return errors;
 	}
 	if (token == COND_T)
 	{//applying rule 25
-		ruleFile << "Applying Rule 25" << endl;
+		ruleFile << "Using Rule 25" << endl;
 		token = lex->GetToken();
-		
+
 		if (token != LPAREN_T){
 			errors++;
 			ReportError(string("LPAREN_T expected in action, but see " + lex->GetTokenName(token)));
 		}
-		
+
 		token = lex->GetToken();
 		errors+= stmt_pair_body();
-		ruleFile << "Exiting Action function; current token is: " << lex->GetTokenName(token) << endl;
+		ruleFile << "Exiting action function; current token is: " << lex ->GetTokenName (token) << endl;
 		return errors;
 	}
 	if ( token == LISTOP_T){
 		//RULE 26
-		ruleFile << "Applying Rule 26" << endl;
+		ruleFile << "Using Rule 26" << endl;
 		errors += stmt();
-		ruleFile << "Exiting Action function; current token is: " << lex->GetTokenName(token) << endl;
+		ruleFile << "Exiting action function; current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	}
 	if ( token == CONS_T){
 		//RULE 27
-		ruleFile << "Applying Rule 27" << endl;
+		ruleFile << "Using Rule 27" << endl;
 		token = lex->GetToken();
 		errors += stmt();
 		errors += stmt();
-		ruleFile << "Exiting Action function; current token is: " << lex->GetTokenName(token) << endl;
+		ruleFile << "Exiting action function; current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	}
 	if ( token == AND_T){
 		//RULE 28
-		ruleFile << "Applying Rule 28" << endl;
+		ruleFile << "Using Rule 28" << endl;
 		token = lex->GetToken();
 		errors += stmt();
-		ruleFile << "Exiting Action function; current token is: " << lex->GetTokenName(token) << endl;
+		ruleFile << "Exiting action function; current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	}
 	if ( token == OR_T){
 		//RULE 29
-		ruleFile << "Applying Rule 29" << endl;
+		ruleFile << "Using Rule 29" << endl;
 		token = lex->GetToken();
 		errors += stmt();
-		ruleFile << "Exiting Action function; current token is: " << lex->GetTokenName(token) << endl;
+		ruleFile << "Exiting action function; current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	}
 	if ( token == NOT_T){
 		//RULE 30
-		ruleFile << "Applying Rule 30" << endl;
+		ruleFile << "Using Rule 30" << endl;
 		token = lex->GetToken();
 		errors += stmt();
-		ruleFile << "Exiting Action function; current token is: " << lex->GetTokenName(token) << endl;
+		ruleFile << "Exiting action function; current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	}
 	if ( token == NUMBERP_T){
 		//RULE 31
-		ruleFile << "Applying Rule 31" << endl;
+		ruleFile << "Using Rule 31" << endl;
 		token = lex->GetToken();
 		errors += stmt();
-		ruleFile << "Exiting Action function; current token is: " << lex->GetTokenName(token) << endl;
+		ruleFile << "Exiting action function; current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	}
 	if ( token == LISTP_T){
 		//RULE 32
-		ruleFile << "Applying Rule 32" << endl;
+		ruleFile << "Using Rule 32" << endl;
 		token = lex->GetToken();
 		errors += stmt();
-		ruleFile << "Exiting Action function; current token is: " << lex->GetTokenName(token) << endl;
+		ruleFile << "Exiting action function; current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	}
 	if ( token == ZEROP_T){
 		//RULE 33
-		ruleFile << "Applying Rule 33" << endl;
+		ruleFile << "Using Rule 33" << endl;
 		token = lex->GetToken();
 		errors += stmt();
-		ruleFile << "Exiting Action function; current token is: " << lex->GetTokenName(token) << endl;
+		ruleFile << "Exiting action function; current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	}
 	if ( token == NULLP_T){
 		//RULE 34
-		ruleFile << "Applying Rule 34" << endl;
+		ruleFile << "Using Rule 34" << endl;
 		token = lex->GetToken();
 		errors += stmt();
-		ruleFile << "Exiting Action function; current token is: " << lex->GetTokenName(token) << endl;
+		ruleFile << "Exiting action function; current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	}
 	if ( token == STRINGP_T){
 		//RULE 35
-		ruleFile << "Applying Rule 35" << endl;
+		ruleFile << "Using Rule 35" << endl;
 		token = lex->GetToken();
 		errors += stmt();
-		ruleFile << "Exiting Action function; current token is: " << lex->GetTokenName(token) << endl;
+		ruleFile << "Exiting action function; current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	}
 	if ( token == PLUS_T){
 		//RULE 36
-		ruleFile << "Applying Rule 36" << endl;
+		ruleFile << "Using Rule 36" << endl;
 		token = lex->GetToken();
 		errors += stmt_list();
-		ruleFile << "Exiting Action function; current token is: " << lex->GetTokenName(token) << endl;
+		ruleFile << "Exiting action function; current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	}
 	if ( token == MINUS_T){
 		//RULE 37
-		ruleFile << "Applying Rule 37" << endl;
+		ruleFile << "Using Rule 37" << endl;
 		token = lex->GetToken();
 		errors += stmt();
 		errors += stmt_list();
-		ruleFile << "Exiting Action function; current token is: " << lex->GetTokenName(token) << endl;
+		ruleFile << "Exiting action function; current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	}
 	if ( token == DIV_T){
 		//RULE 38
-		ruleFile << "Applying Rule 38" << endl;
+		ruleFile << "Using Rule 38" << endl;
 		token = lex->GetToken();
 		errors += stmt();
 		errors += stmt_list();
-		ruleFile << "Exiting Action function; current token is: " << lex->GetTokenName(token) << endl;
+		ruleFile << "Exiting action function; current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	}
 	if ( token == MULT_T){
 		//RULE 39
-		ruleFile << "Applying Rule 39" << endl;
+		ruleFile << "Using Rule 39" << endl;
 		token = lex->GetToken();
 		errors += stmt_list();
-		ruleFile << "Exiting Action function; current token is: " << lex->GetTokenName(token) << endl;
+		ruleFile << "Exiting action function; current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	}
 	if ( token == MODULO_T){
 		//RULE 40
-		ruleFile << "Applying Rule 40" << endl;
+		ruleFile << "Using Rule 40" << endl;
 		token = lex->GetToken();
 		errors += stmt();
 		errors += stmt();
-		ruleFile << "Exiting Action function; current token is: " << lex->GetTokenName(token) << endl;
+		ruleFile << "Exiting action function; current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	}
 	if ( token == ROUND_T){
 		//RULE 41
-		ruleFile << "Applying Rule 41" << endl;
+		ruleFile << "Using Rule 41" << endl;
 		token = lex->GetToken();
 		errors += stmt();
-		ruleFile << "Exiting Action function; current token is: " << lex->GetTokenName(token) << endl;
+		ruleFile << "Exiting action function; current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	}
 	if ( token == EQUALTO_T){
 		//RULE 42
-		ruleFile << "Applying Rule 42" << endl;
+		ruleFile << "Using Rule 42" << endl;
 		token = lex->GetToken();
 		errors += stmt_list();
-		ruleFile << "Exiting Action function; current token is: " << lex->GetTokenName(token) << endl;
+		ruleFile << "Exiting action function; current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	}
 	if ( token == GT_T){
 		//RULE 43
-		ruleFile << "Applying Rule 43" << endl;
+		ruleFile << "Using Rule 43" << endl;
 		token = lex->GetToken();
 		errors += stmt_list();
-		ruleFile << "Exiting Action function; current token is: " << lex->GetTokenName(token) << endl;
+		ruleFile << "Exiting action function; current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	}
 	if ( token == LT_T){
 		//RULE 44
-		ruleFile << "Applying Rule 44" << endl;
+		ruleFile << "Using Rule 44" << endl;
 		token = lex->GetToken();
 		errors += stmt_list();
-		ruleFile << "Exiting Action function; current token is: " << lex->GetTokenName(token) << endl;
+		ruleFile << "Exiting action function; current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	}
 	if ( token == GTE_T){
 		//RULE 45
-		ruleFile << "Applying Rule 45" << endl;
+		ruleFile << "Using Rule 45" << endl;
 		token = lex->GetToken();
 		errors += stmt_list();
-		ruleFile << "Exiting Action function; current token is: " << lex->GetTokenName(token) << endl;
+		ruleFile << "Exiting action function; current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	}
 	if ( token == LTE_T){
 		//RULE 46
-		ruleFile << "Applying Rule 46" << endl;
+		ruleFile << "Using Rule 46" << endl;
 		token = lex->GetToken();
 		errors += stmt_list();
-		ruleFile << "Exiting Action function; current token is: " << lex->GetTokenName(token) << endl;
+		ruleFile << "Exiting action function; current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	}
 	if ( token == IDENT_T){
 		//RULE 47
-		ruleFile << "Applying Rule 47" << endl;
+		ruleFile << "Using Rule 47" << endl;
 		token = lex->GetToken();
 		errors += stmt_list();
-		ruleFile << "Exiting Action function; current token is: " << lex->GetTokenName(token) << endl;
+		ruleFile << "Exiting action function; current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	}
 	if ( token == DISPLAY_T){
 		//RULE 48
-		ruleFile << "Applying Rule 48" << endl;
+		ruleFile << "Using Rule 48" << endl;
 		token = lex->GetToken();
 		errors += stmt();
-		ruleFile << "Exiting Action function; current token is: " << lex->GetTokenName(token) << endl;
+		ruleFile << "Exiting action function; current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	}
 	if ( token == NEWLINE_T){
 		//RULE 49
-		ruleFile << "Applying Rule 49" << endl;
+		ruleFile << "Using Rule 49" << endl;
 		token = lex->GetToken();
-		ruleFile << "Exiting Action function; current token is: " << lex->GetTokenName(token) << endl;
+		ruleFile << "Exiting action function; current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	}
 	//no rule found
@@ -681,152 +653,152 @@ int SyntacticalAnalyzer::action(){
 	errors++;
 	ReportError(string("no rule found in action, curren token is " + lex->GetTokenName(token)));
 	token = lex->GetToken();
-	ruleFile << "Exiting Action function; current token is: " << lex->GetTokenName(token) << endl;
+	ruleFile << "Exiting action function; current token is: " << lex->GetTokenName(token) << endl;
 	return errors;
 
 }
 
 int SyntacticalAnalyzer::any_other_token(){
-  //This function deals with the stmt_pair_body rules (22-23) and will check for syntactical correctness,
+   //This function deals with the stmt_pair_body rules (22-23) and will check for syntactical correctness,
   //this function will then, depending on the token seen, send the program tomre, tokens, any_other_tokens, or return. 
   int errors = 0;
-  string error_type;
-  ruleFile << "Entering Any_other_token function; current token is: " << lex->GetTokenName(token) << endl;
-  
-  switch(token){
-  case LPAREN_T:
-    ruleFile << "Applying Rule 50:\n";
-    token = lex->GetToken();
-    errors += more_tokens();
-    if(token != RPAREN_T){
-      errors++;
-      ReportError(string("Expected RPARENT_T in a_o_t, but found " + lex->GetTokenName(token)));
-    }
-    else token = lex->GetToken();
-			break;
+	string error_type;
+	ruleFile << "Entering any_other_token function; Current token is: " << lex ->GetTokenName(token) << ", lexeme: " << lex->GetLexeme() << endl;
+
+	switch(token){
+		case LPAREN_T:
+			ruleFile << "Using Rule 50:\n";
+			token = lex->GetToken();
+			errors += more_tokens();
+			if(token != RPAREN_T){
+				errors++;
+				ReportError(string("Expected RPARENT_T in any_other_token, but found " + lex->GetTokenName(token)));
+			}
+			else token = lex->GetToken();
+      break;
 		case IDENT_T:
-			ruleFile << "Applying Rule 51\n";
+			ruleFile << "Using Rule 51\n";
 			token = lex->GetToken();
 			break;
 		case NUMLIT_T:
-			ruleFile << "Applying Rule 52\n";
+			ruleFile << "Using Rule 52\n";
 			token = lex->GetToken();
 			break;
 		case STRLIT_T:
-			ruleFile << "Applying Rule 53\n";
+			ruleFile << "Using Rule 53\n";
 			token = lex->GetToken();
 			break;
 		case CONS_T:
-			ruleFile << "Applying Rule 54\n";
+			ruleFile << "Using Rule 54\n";
 			token = lex->GetToken();
 			break;
 		case IF_T:
-			ruleFile << "Applying Rule 55\n";
+			ruleFile << "Using Rule 55\n";
 			token = lex->GetToken();
 			break;
 		case DISPLAY_T:
-			ruleFile << "Applying Rule 56\n";
+			ruleFile << "Using Rule 56\n";
 			token = lex->GetToken();
 			break;
 		case NEWLINE_T:
-			ruleFile << "Applying Rule 57\n";
+			ruleFile << "Using Rule 57\n";
 			token = lex->GetToken();
 			break;
 		case LISTOP_T:
-			ruleFile << "Applying Rule 58\n";
+			ruleFile << "Using Rule 58\n";
 			token = lex->GetToken();
 			break;
 		case AND_T:
-			ruleFile << "Applying Rule 59\n";
+			ruleFile << "Using Rule 59\n";
 			token = lex->GetToken();
 			break;
 		case OR_T:
-			ruleFile << "Applying Rule 60\n";
+			ruleFile << "Using Rule 60\n";
 			token = lex->GetToken();
 			break;
 		case NOT_T:
-			ruleFile << "Applying Rule 61\n";
+			ruleFile << "Using Rule 61\n";
 			token = lex->GetToken();
 			break;
 		case DEFINE_T:
-			ruleFile << "Applying Rule 62\n";
+			ruleFile << "Using Rule 62\n";
 			token = lex->GetToken();
 			break;
 		case NUMBERP_T:
-			ruleFile << "Applying Rule 63\n";
+			ruleFile << "Using Rule 63\n";
 			token = lex->GetToken();
 			break;
 		case LISTP_T:
-			ruleFile << "Applying Rule 64\n";
+			ruleFile << "Using Rule 64\n";
 			token = lex->GetToken();
 			break;
 		case ZEROP_T:
-			ruleFile << "Applying Rule 65\n";
+			ruleFile << "Using Rule 65\n";
 			token = lex->GetToken();
 			break;
 		case NULLP_T:
-			ruleFile << "Applying Rule 66\n";
+			ruleFile << "Using Rule 66\n";
 			token = lex->GetToken();
 			break;
 		case STRINGP_T:
-			ruleFile << "Applying Rule 67\n";
+			ruleFile << "Using Rule 67\n";
 			token = lex->GetToken();
 			break;
 		case PLUS_T:
-			ruleFile << "Applying Rule 68\n";
+			ruleFile << "Using Rule 68\n";
 			token = lex->GetToken();
 			break;
 		case MINUS_T:
-			ruleFile << "Applying Rule 69\n";
+			ruleFile << "Using Rule 69\n";
 			token = lex->GetToken();
 			break;
 		case DIV_T:
-			ruleFile << "Applying Rule 70\n";
+			ruleFile << "Using Rule 70\n";
 			token = lex->GetToken();
 			break;
 		case MULT_T:
-			ruleFile << "Applying Rule 71\n";
+			ruleFile << "Using Rule 71\n";
 			token = lex->GetToken();
 			break;
 		case MODULO_T:
-			ruleFile << "Applying Rule 72\n";
+			ruleFile << "Using Rule 72\n";
 			token = lex->GetToken();
 			break;
 		case ROUND_T:
-			ruleFile << "Applying Rule 73\n";
+			ruleFile << "Using Rule 73\n";
 			token = lex->GetToken();
 			break;
 		case EQUALTO_T:
-			ruleFile << "Applying Rule 74\n";
+			ruleFile << "Using Rule 74\n";
 			token = lex->GetToken();
 			break;
 		case GT_T:
-			ruleFile << "Applying Rule 75\n";
+			ruleFile << "Using Rule 75\n";
 			token = lex->GetToken();
 			break;
 		case LT_T:
-			ruleFile << "Applying Rule 76\n";
+			ruleFile << "Using Rule 76\n";
 			token = lex->GetToken();
 			break;
 		case GTE_T:
-			ruleFile << "Applying Rule 77\n";
+			ruleFile << "Using Rule 77\n";
 			token = lex->GetToken();
 			break;
 		case LTE_T:
-			ruleFile << "Applying Rule 78\n";
+			ruleFile << "Using Rule 78\n";
 			token = lex->GetToken();
 			break;
 		case SQUOTE_T:
-			ruleFile << "Applying Rule 79\n";
+			ruleFile << "Using Rule 79\n";
 			token = lex->GetToken();
 			errors += any_other_token();
 			break;
 		case COND_T:
-			ruleFile << "Applying Rule 80\n";
+			ruleFile << "Using Rule 80\n";
 			token = lex->GetToken();
 			break;
 		case ELSE_T:
-			ruleFile << "Applying Rule 81\n";
+			ruleFile << "Using Rule 81\n";
 			token = lex->GetToken();
 			break;
 		default:
@@ -837,20 +809,12 @@ int SyntacticalAnalyzer::any_other_token(){
 	}
 
 	//if the current token at this point is not apart of the follows then that is an error?
-	/*
-	while(!follows){
-		errors++;
-		ReportError(string("Expected RPAREN_T, found: " + lex->GetTokenName(token)));
-		token = lex->GetToken();	
-	}
-	*/
-
 	ruleFile << "Exiting any_other_token function; current token is: " << lex->GetTokenName(token) << endl;
 	return errors;
 }
 
 void SyntacticalAnalyzer::ReportError (const string & msg){
-  lex->listing << "Syntax error at " << lex->get_line_num() << ',' << lex->get_pos() << ": " << msg << endl;
-  lex->debug << "Syntax error at " << lex->get_line_num() << ',' << lex->get_pos() << ": " << msg << endl;
+	lex->listing << "Syntax error at " << lex->get_line_num() << ',' << lex->get_pos() << ": " << msg << endl;
+	lex->debug << "Syntax error at " << lex->get_line_num() << ',' << lex->get_pos() << ": " << msg << endl;
 
 }
