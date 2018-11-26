@@ -119,7 +119,7 @@ int SyntacticalAnalyzer::define(){
 
 	int errors = 0;
 
-	ruleFile << "Using  Rule 2" << endl;
+	ruleFile << "Using  Rule 4" << endl;
 
 	if(token != DEFINE_T){
 		errors++;
@@ -178,7 +178,7 @@ int SyntacticalAnalyzer::stmt_list(){
 
 	}
 
-	if(token == RPAREN_T) {
+	if(token == RPAREN_T || token == IDENT_T) {
 		ruleFile << "Using Rule 6" << endl;
 		ruleFile << "Exiting stmt_list function; current token is: " << lex ->GetTokenName (token) << endl;
 		return errors;
@@ -203,6 +203,9 @@ int SyntacticalAnalyzer::stmt(){
 		case IDENT_T:
 			ruleFile << "Using Rule 8" << endl;
 			token = lex->GetToken();
+			ruleFile << "Exiting stmt_list function; current token is: " << lex ->GetTokenName (token) << endl;
+			return errors;
+
 
 		case LPAREN_T:
 			ruleFile << "Using Rule 9" << endl;
@@ -216,25 +219,37 @@ int SyntacticalAnalyzer::stmt(){
 			else{
 				ReportError(string("RPAREN_T expected in stmt function, current token is: " + lex->GetTokenName(token)));
 			}
+			ruleFile << "Exiting stmt_list function; current token is: " << lex ->GetTokenName (token) << endl;
+			return errors;
+
 
 		case NUMLIT_T: 
 			ruleFile << "stmt function complete. Current token is: " << lex->GetTokenName(token) << endl;
 			ruleFile << "Using Rule 7"  << endl;
 			errors += literal();
+			ruleFile << "Exiting stmt_list function; current token is: " << lex ->GetTokenName (token) << endl;
+			return errors;
 
 		case STRLIT_T:
 			//ruleFile << "stmt function complete. Current token is: " << lex->GetTokenName(token) << endl;
 			ruleFile << "Using Rule 7"  << endl;
 			errors += literal();
+			ruleFile << "Exiting stmt_list function; current token is: " << lex ->GetTokenName (token) << endl;
+			return errors;
 
 		case SQUOTE_T:
 			//ruleFile << "stmt function complete. Current token is: " << lex->GetTokenName(token) << endl;
 			ruleFile << "Using Rule 7"  << endl;
 			errors += literal();
+			ruleFile << "Exiting stmt_list function; current token is: " << lex ->GetTokenName (token) << endl;
+			return errors;
 
+			
 		default: //no rule found
 			errors++;
 			ReportError(string("No rule found in stmt function, current token is: " + lex->GetTokenName(token)));
+			ruleFile << "Exiting stmt_list function; current token is: " << lex ->GetTokenName (token) << endl;
+			return errors;
 
 	}
 	ruleFile << "Exiting stmt_list function; current token is: " << lex ->GetTokenName (token) << endl;
