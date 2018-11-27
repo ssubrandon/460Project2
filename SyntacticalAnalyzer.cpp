@@ -26,7 +26,7 @@ SyntacticalAnalyzer::SyntacticalAnalyzer (char * filename)
 		i++;
 	}
 	token = lex -> GetToken();
-	ruleFile.open(file + ".Zp2");
+	ruleFile.open(file + ".p2");
 
 	errors = program();
 }
@@ -168,7 +168,8 @@ int SyntacticalAnalyzer::stmt_list(){
   //This function deals with the stmt_list rules(5-6) and will check for syntactical correctness,
   //this function will then, depending on the token seen, send the program to stmt and stmt list
   // or will return after seeing nothing in the file.
-	ruleFile << "Entering stmt_list function; Current token is: " << lex ->GetTokenName(token) << ", lexeme: " << lex->GetLexeme() << endl;
+  
+  ruleFile << "Entering stmt_list function; Current token is: " << lex ->GetTokenName(token) << ", lexeme: " << lex->GetLexeme() << endl;
 
 	int errors = 0;
 	if(token == EOF_T){
@@ -262,12 +263,20 @@ int SyntacticalAnalyzer::literal(){
 	{ 
 		ruleFile << "Using Rule 10" << endl;
 		token = lex->GetToken();
+		ruleFile << "Exiting literal function; current token is: " << lex ->GetTokenName (token) << endl;
+		return errors;
 	}
+
+	
 	if (token == STRLIT_T)
 	{
 		ruleFile << "Using Rule 11" << endl;
 		token = lex->GetToken();
+		ruleFile << "Exiting literal function; current token is: " << lex ->GetTokenName (token) << endl;
+		return errors;
 	}
+
+
 	if ( token == SQUOTE_T )
 	{
 		ruleFile << "Using Rule 12" << endl;
@@ -385,6 +394,12 @@ int SyntacticalAnalyzer::stmt_pair(){
 		errors ++;
 		token = lex->GetToken();	
 	} // end left paren if
+	if(token != RPAREN_T){
+	  ruleFile << "Using Rule 21" << endl;
+	  ruleFile << "Exiting stmt_pair function; current token is: " << lex ->GetTokenName (token) << endl;
+	  return errors;
+
+	}
 	token = lex->GetToken();
 	ruleFile << "Using Rule 20" << endl;
 	errors += stmt_pair_body();
@@ -410,6 +425,7 @@ int SyntacticalAnalyzer::stmt_pair_body(){
 	int errors = 0;
 	if (token == ELSE_T){
 		//rule 23
+	   ruleFile << "Using Rule 23" << endl;
 		token = lex->GetToken();
 		errors += stmt();
 		if (token != RPAREN_T){
@@ -420,6 +436,7 @@ int SyntacticalAnalyzer::stmt_pair_body(){
 
 	if(token == NUMLIT_T || token == STRLIT_T || token == SQUOTE_T ||token == IDENT_T || token== LPAREN_T) {
 		//rule 22
+	   ruleFile << "Using Rule 22" << endl;
 		errors += stmt();
 		errors += stmt();
 		if (token != RPAREN_T){
@@ -469,6 +486,7 @@ int SyntacticalAnalyzer::action(){
 	if ( token == LISTOP_T){
 		//RULE 26
 		ruleFile << "Using Rule 26" << endl;
+		token = lex->GetToken();
 		errors += stmt();
 		ruleFile << "Exiting action function; current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
@@ -486,7 +504,7 @@ int SyntacticalAnalyzer::action(){
 		//RULE 28
 		ruleFile << "Using Rule 28" << endl;
 		token = lex->GetToken();
-		errors += stmt();
+		errors += stmt_list();
 		ruleFile << "Exiting action function; current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	}
@@ -494,7 +512,7 @@ int SyntacticalAnalyzer::action(){
 		//RULE 29
 		ruleFile << "Using Rule 29" << endl;
 		token = lex->GetToken();
-		errors += stmt();
+		errors += stmt_list();
 		ruleFile << "Exiting action function; current token is: " << lex->GetTokenName(token) << endl;
 		return errors;
 	}

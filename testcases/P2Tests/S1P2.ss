@@ -1,4 +1,0 @@
-(define (main)
-  (newline)
-  a
-  )

@@ -1,6 +1,0 @@
-(define(tester_for_one)
-  '(newline)
-  )
-(define(tester_for_two)
-  for_two)
-(two)
