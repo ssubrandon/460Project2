@@ -1,0 +1,7 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/X4P2.ss
+   1: (define (main)
+   2:   (display (car '(1 2 3)))
+   3:   (newline)
+   4:   )
+   5: (main)
+0 errors found in input file

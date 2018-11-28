@@ -1,0 +1,11 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/X3P2.ss
+   1: (define (function s)
+   2:   (display (+ 9 s))
+   3:   (display (- s 4))
+   4:   (display (/ 12 s))
+   5:   (display (round s))
+   6:   (display (* s 3))
+   7:   (display (modulo s 24))
+   8:   )
+   9: (function 12)
+0 errors found in input file

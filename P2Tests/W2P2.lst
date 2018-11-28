@@ -1,0 +1,18 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/W2P2.ss
+   1: (define (main)
+   2:     (display (+ 5 6)
+   3:     (newline)
+Error at 3,5: 'RPAREN_T' expected 
+   4:     (display (number? 5) )
+   5:     (newline
+   6:     (display (list? 9) )
+Error at 6,5: 'RPAREN_T' expected 
+   7:     (display (zero? 0) )
+   8:     display (null? 3) )
+Error at 8,11: 'display' unexpected 
+   9:     (display (string? 2) )
+Error at 9,12: 'display' unexpected 
+  10: )
+  11: 
+  12: (main)
+4 errors found in input file

@@ -26,7 +26,7 @@ SyntacticalAnalyzer::SyntacticalAnalyzer (char * filename)
 		i++;
 	}
 	token = lex -> GetToken();
-	ruleFile.open(file + ".p2");
+	ruleFile.open(file + ".Zp2");
 
 	errors = program();
 }
@@ -64,9 +64,8 @@ int SyntacticalAnalyzer::program(){
 	token = lex->GetToken();
 	errors += more_defines();
 	if (token != EOF_T) {
-		errors ++;
-		
-
+		errors ++;		
+		ReportError(string("expected a EOF_T in program, but found  " + lex->GetTokenName(token)));
 	} // end of if EOF
 	ruleFile << "Exiting Program function; current token is: " << lex ->GetTokenName (token) << endl;
 
@@ -153,8 +152,9 @@ int SyntacticalAnalyzer::define(){
 
 
 	if(token != RPAREN_T){
-		errors++;
-		ReportError(string("expected a RPAREN_T in define, but found  " + lex->GetTokenName(token)));
+	  errors++;
+	  ReportError(string("expected a RPAREN_T in define, but found  " + lex->GetTokenName(token)));
+		token = lex->GetToken();
 	}
 	token = lex->GetToken();
 	ruleFile << "Exiting Define function; current token is: " << lex ->GetTokenName (token) << endl;
@@ -180,7 +180,7 @@ int SyntacticalAnalyzer::stmt_list(){
 
 	}
 
-	if(token == RPAREN_T || token == IDENT_T) {
+	if(token == RPAREN_T ) {
 		ruleFile << "Using Rule 6" << endl;
 		ruleFile << "Exiting stmt_list function; current token is: " << lex ->GetTokenName (token) << endl;
 		return errors;
@@ -215,10 +215,11 @@ int SyntacticalAnalyzer::stmt(){
 			errors += action();
 			//returned token should be a RPAREN?
 			if(token == RPAREN_T){
-				token=lex->GetToken();
+			  token=lex->GetToken();
 			}
 			else{
-				ReportError(string("RPAREN_T expected in stmt function, current token is: " + lex->GetTokenName(token)));
+			  ReportError(string("RPAREN_T expected in stmt function, current token is: " + lex->GetTokenName(token)));
+			  token=lex->GetToken();
 			}
 			break;
 
@@ -248,7 +249,7 @@ int SyntacticalAnalyzer::stmt(){
 			break;
 
 	}
-	ruleFile << "Exiting stmt_list function; current token is: " << lex ->GetTokenName (token) << endl;
+	ruleFile << "Exiting stmt function; current token is: " << lex ->GetTokenName (token) << endl;
 	return errors;	
 }
 
@@ -347,17 +348,20 @@ int SyntacticalAnalyzer::param_list(){
 		return errors;
 	}
 	else if (token == IDENT_T){
-		ruleFile << "Using Rule 16" << endl;
-		token = lex->GetToken();
-		errors += param_list();
+	  ruleFile << "Using Rule 16" << endl;
+	  token = lex->GetToken();
+	  errors += param_list();
+	  ruleFile << "Exiting param_list function; current token is: " << lex ->GetTokenName (token) << endl;
+	  return errors;
 	}
 	else{//we have an error
-		errors++;
+	  errors++;
 		ReportError(string("expected a IDENT_T or RPAREN_T in paramList, but found  " + lex->GetTokenName(token)));
 		ruleFile << "Exiting param_list function; current token is: " << lex ->GetTokenName (token) << endl;
 		return errors;
 	}
 	ruleFile << "Exiting param_list function; current token is: " << lex ->GetTokenName (token) << endl;
+	return errors;
 }
 
 int SyntacticalAnalyzer::else_part(){
@@ -394,7 +398,7 @@ int SyntacticalAnalyzer::stmt_pair(){
 		errors ++;
 		token = lex->GetToken();	
 	} // end left paren if
-	if(token != RPAREN_T){
+	if(token == RPAREN_T){
 	  ruleFile << "Using Rule 21" << endl;
 	  ruleFile << "Exiting stmt_pair function; current token is: " << lex ->GetTokenName (token) << endl;
 	  return errors;
@@ -409,7 +413,7 @@ int SyntacticalAnalyzer::stmt_pair(){
 		ReportError(string("expected a RPAREN_T in stmtpair, but found  " + lex->GetTokenName(token)));
 		token = lex->GetToken();
 	} // end right paren if 
-	token = lex->GetToken();
+	//token = lex->GetToken();
 	ruleFile << "Exiting stmt_pair function; current token is: " << lex ->GetTokenName (token) << endl;
 
 	return errors;
@@ -432,6 +436,8 @@ int SyntacticalAnalyzer::stmt_pair_body(){
 			errors++;
 			ReportError(string("expected a RPAREN_T in stmt_pair_body, but found  " + lex->GetTokenName(token)));
 		}
+		else
+		   token = lex->GetToken();
 	}
 
 	if(token == NUMLIT_T || token == STRLIT_T || token == SQUOTE_T ||token == IDENT_T || token== LPAREN_T) {

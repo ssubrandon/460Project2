@@ -1,0 +1,10 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/Z4P2.ss
+   1: ; Nicholas Ivanoff Test case 1
+   2: 
+   3: (define (main)
+   4:   (display "Test Case 1 Complete!")
+   5:   (newline)
+   6: )
+   7: 
+   8: (main)
+0 errors found in input file

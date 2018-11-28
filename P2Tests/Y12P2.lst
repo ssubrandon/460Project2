@@ -1,0 +1,13 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/Y12P2.ss
+   1: (define (rule21_Test t)
+   2:   (cond (t 0)
+   3: 	 )
+   4:   )
+   5: 
+   6: (rule21_Test 21)
+   7: 
+   8: ;(newline)
+   9: ;(display (rule21_Test 21))
+  10: ;(newline)
+  11: ;(newline)
+0 errors found in input file

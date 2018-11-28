@@ -1,0 +1,11 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/X5P2.ss
+   1: (define (main)
+   2:   (other '(and or not))
+   3:   )
+   4: 
+   5: (define (other list)
+   6:   (display (+ 12345 56789))
+   7:   )
+   8: 
+   9: (main)
+0 errors found in input file

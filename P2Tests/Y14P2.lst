@@ -1,0 +1,8 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/Y14P2.ss
+   1: (define (main)
+   2:   (display "showAString")
+   3:   (newline)
+   4: )
+   5: 
+   6: (main)
+0 errors found in input file

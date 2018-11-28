@@ -1,0 +1,22 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/Z2P2.ss
+   1: (define (funk3 var1)
+   2:   (if var1)
+Error at 2,11: ')' unexpected 
+   3:   (car '(a))
+   4:   (else (car '(b)))
+Error at 4,7: 'else' unexpected 
+   5:   )
+   6: 
+   7: (main
+   8:  (display ( - + / * = <= ))
+Error at 8,15: '+' unexpected 
+   9:  )
+Error at 9,3: '' unexpected 
+Error at 9,3: '' unexpected 
+Error at 9,3: '' unexpected 
+Error at 9,3: 'RPAREN_T' expected 
+Error at 9,3: 'RPAREN_T' expected 
+Error at 9,3: '' unexpected 
+Error at 9,3: '' unexpected 
+Error at 9,3: 'RPAREN_T' expected 
+11 errors found in input file

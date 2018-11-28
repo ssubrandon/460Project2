@@ -1,0 +1,9 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/U4P2.ss
+   1: (define (Blank1 Blank2 P)
+   2:   '123.231
+   3:   (newline)
+   4:   )
+Error at 4,4: 'LPAREN_T' expected 
+Error at 4,4: '' unexpected 
+Error at 4,4: '' unexpected 
+3 errors found in input file

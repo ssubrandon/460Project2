@@ -1,0 +1,10 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/T7P2.ss
+   1: (define (main)
+   2:   (display ')
+Error at 2,13: ')' unexpected 
+   3:   (display 'zero?)
+   4:   (newline)
+Error at 4,3: 'RPAREN_T' expected 
+   5: )
+   6: (main)
+2 errors found in input file

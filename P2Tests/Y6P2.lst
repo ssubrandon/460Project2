@@ -1,0 +1,12 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/Y6P2.ss
+   1: (define (rule11_Test)
+   2:   "DoubleQuoteStrLit"
+   3:   )
+   4: 
+   5: (rule11_Test)
+   6: 
+   7: ;(newline)
+   8: ;(display (rule11_Test))
+   9: ;(newline)
+  10: ;(newline)
+0 errors found in input file

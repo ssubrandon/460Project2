@@ -1,0 +1,8 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/V5P2.ss
+   1: (define (func5)
+   2:   (cadr(cons(and 1.56 6.789)(or)))
+   3:   (not func6)
+   4:   )
+   5: (ID (Display(newline)))
+   6: 
+0 errors found in input file

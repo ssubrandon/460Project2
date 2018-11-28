@@ -1,0 +1,5 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/S6P2.ss
+   1: (define (func)
+   2:   (list? 'define))
+   3: (func)
+0 errors found in input file

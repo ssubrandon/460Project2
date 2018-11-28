@@ -1,0 +1,25 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/T6P2.ss
+   1: (define (testCase x)
+   2: 	(cond(
+   3: 		'((number? x)(display "is a number"))
+   4: 		'((list? x)(display "is a list"))
+   5: 		'((string? x)(display "is a string"))
+Error at 5,3: 'RPAREN_T' expected 
+Error at 5,3: ''' unexpected 
+   6: 		)
+   7: 		(else '(display "Not a number/list/string"))
+Error at 7,7: 'else' unexpected 
+   8: 		)
+Error at 8,3: 'LPAREN_T' expected 
+Error at 8,3: ')' unexpected 
+   9: 	(newline)
+  10: 	)
+  11: (define (main)
+  12: 	(testCase 12)
+  13: 	(testCase '(a b c))
+  14: 	(testCase "A String")
+  15: 	(testCase '())
+  16: 	)
+  17:         
+  18: (main)
+5 errors found in input file

@@ -1,0 +1,6 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/V4P2.ss
+   1: (define (Func4)
+   2:   '(> < <= * modulo round = if 'else)
+   3:   )
+   4: (ID)
+0 errors found in input file

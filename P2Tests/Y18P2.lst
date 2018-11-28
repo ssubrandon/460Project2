@@ -1,0 +1,15 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/Y18P2.ss
+   1: (define (main) 
+   2:     (newline)
+   3:     (if (= 12 14) "Is the semester over yet"
+   4: 	"four more weeks"
+   5: )
+   6: (newline)
+   7: (display "I have a cat")
+   8: (newline)
+   9: )
+  10: 
+  11: (main)
+  12: 
+  13: ;;Rules used: 1, 4, 5, 6, 7, 11, 18,  24, 42, 48, 49
+0 errors found in input file

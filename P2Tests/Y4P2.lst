@@ -1,0 +1,19 @@
+Input file: /home/faculty/tiawatts/cs460/P2Tests/Y4P2.ss
+   1: (define (main)
+   2:   (cdr '(1 2 3))
+   3:   (/ 5 6)
+   4:   (display (or (= 12 (* 2 6)) (= 5 6)))
+   5:   (newline)
+   6:   (cdr and)
+Error at 6,10: 'and' unexpected 
+   7:   )
+   8: 
+   9: (main)
+Error at 9,7: 'RPAREN_T' expected 
+Error at 9,7: '' unexpected 
+Error at 9,7: '' unexpected 
+Error at 9,7: 'RPAREN_T' expected 
+Error at 9,7: 'LPAREN_T' expected 
+Error at 9,7: '' unexpected 
+Error at 9,7: '' unexpected 
+8 errors found in input file
